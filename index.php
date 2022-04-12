@@ -1,19 +1,92 @@
+<?php
+session_start();
+print_r($_SESSION);
+if (isset($_SESSION["q"])) $questionText = $_SESSION["q"];
+$_SESSION = [];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/quiz.css"/>
+    <title>BlizzQuizz</title>
 </head>
 <body>
-    <?php
-        echo "Hello, we are starting to work with Databases and PHP PDO!"; 
-    ?>
-    
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div> <!-- start invisible col -->
+        <div class="col-6 quizContainer"> <!-- quiz container -->
+
+
+        <div class="row"> <!-- quiz nav bar -->
+                <div class="col">
+                    <p>Quiz Generator</p> <!-- title text -->
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary">New Quiz</button><!-- button new quiz -->
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary">Create Quiz</button><!-- button create quiz -->
+                </div>
+            </div>
+
+            <div class="row questionBox mt-2"> <!-- quiz nav bar -->
+                <div class="col">
+                    <p><?=$questionText?></p> <!-- title text -->
+                </div>
+            </div>
+
+            <form action="/php/result.php" method="POST">
+
+                <div class="row mt-1"> <!-- quiz nav bar -->
+                    <div class="col">
+                        <p>Antwort 1</p> <!-- title text -->
+                    </div>
+                </div>
+
+                <div class="row mt-1"> <!-- quiz nav bar -->
+                    <div class="col">
+                        <p>Antwort 2</p> <!-- title text -->
+                    </div>
+                </div>
+
+                <div class="row mt-1"> <!-- quiz nav bar -->
+                    <div class="col">
+                        <p>Antwort 3</p> <!-- title text -->
+                    </div>
+                </div>
+
+                <div class="row mt-1"> <!-- quiz nav bar -->
+                    <div class="col">
+                        <p>Antwort 4</p> <!-- title text -->
+                    </div>
+                </div>
+
+                <div class="row mt-2 justify-content-between"> <!-- quiz nav bar -->   
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Back</button> <!-- button new quiz -->
+                    </div>
+                    <div class="col">
+                        <p>Timer</p> <!-- title text -->
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Next</button> <!-- button create quiz -->
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+        <div class="col"></div> <!-- end invisible col -->
+    </div>
+</div>
+   
 </body>
 </html>
