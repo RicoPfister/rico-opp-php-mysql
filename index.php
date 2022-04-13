@@ -1,7 +1,12 @@
 <?php
 session_start();
 print_r($_SESSION);
-if (isset($_SESSION["q"])) $questionText = $_SESSION["q"];
+if (isset($_SESSION["q"])) $questionText = $_SESSION["q"]; else $questionText = "";
+if (isset($_SESSION["a1"])) $answer1Text = $_SESSION["a1"]; else $answer1Text = "";
+if (isset($_SESSION["a2"])) $answer2Text = $_SESSION["a2"]; else $answer2Text = "";
+if (isset($_SESSION["a3"])) $answer3Text = $_SESSION["a3"]; else $answer3Text = "";
+if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = "";
+
 $_SESSION = [];
 
 ?>
@@ -37,37 +42,47 @@ $_SESSION = [];
                 </div>
             </div>
 
-            <div class="row questionBox mt-2"> <!-- quiz nav bar -->
+            <div class="row questionBox mt-2 bg-light"> <!-- quiz nav bar -->
                 <div class="col">
                     <p><?=$questionText?></p> <!-- title text -->
                 </div>
             </div>
 
+            <div class="row">
+
             <form action="/php/result.php" method="POST">
 
-                <div class="row mt-1"> <!-- quiz nav bar -->
-                    <div class="col">
-                        <p>Antwort 1</p> <!-- title text -->
+                <div class="row mt-1 bg-light"> <!-- quiz nav bar -->
+                    <div class="col">                    
+          
+                    <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2"><?=$answer1Text?></label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2"><?=$answer2Text?></label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2"><?=$answer3Text?></label>
+</div>
+
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2"><?=$answer4Text?></label>
+</div>
+
+</div>
+
+
                     </div>
                 </div>
 
-                <div class="row mt-1"> <!-- quiz nav bar -->
-                    <div class="col">
-                        <p>Antwort 2</p> <!-- title text -->
-                    </div>
-                </div>
-
-                <div class="row mt-1"> <!-- quiz nav bar -->
-                    <div class="col">
-                        <p>Antwort 3</p> <!-- title text -->
-                    </div>
-                </div>
-
-                <div class="row mt-1"> <!-- quiz nav bar -->
-                    <div class="col">
-                        <p>Antwort 4</p> <!-- title text -->
-                    </div>
-                </div>
+               
 
                 <div class="row mt-2 justify-content-between"> <!-- quiz nav bar -->   
                     <div class="col">
