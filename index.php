@@ -1,13 +1,14 @@
 <?php
 session_start();
-print_r($_SESSION);
+/* print_r($_SESSION); */
+
 if (isset($_SESSION["q"])) $questionText = $_SESSION["q"]; else $questionText = "";
 if (isset($_SESSION["a1"])) $answer1Text = $_SESSION["a1"]; else $answer1Text = "";
 if (isset($_SESSION["a2"])) $answer2Text = $_SESSION["a2"]; else $answer2Text = "";
 if (isset($_SESSION["a3"])) $answer3Text = $_SESSION["a3"]; else $answer3Text = "";
 if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = "";
 
-$_SESSION = [];
+// $_SESSION = [];
 
 ?>
 
@@ -31,16 +32,18 @@ $_SESSION = [];
 
 
         <div class="row"> <!-- quiz nav bar -->
-                <div class="col">
-                    <p>Quiz Generator</p> <!-- title text -->
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-primary">New Quiz</button><!-- button new quiz -->
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-primary">Create Quiz</button><!-- button create quiz -->
-                </div>
+            <div class="col">
+                <p>Quiz Generator</p> <!-- title text -->
             </div>
+            <div class="col">
+                <form action="/php/result.php" method="POST">
+                    <button type="submit" class="btn btn-primary" name="newQuiz" value="1">New Quiz</button><!-- button new quiz -->
+            </div>
+            <div class="col">
+                    <button type="submit" class="btn btn-primary">Create Quiz</button><!-- button create quiz -->
+                </form>
+            </div>
+        </div>
 
             <div class="row questionBox mt-2 bg-light"> <!-- quiz nav bar -->
                 <div class="col">
@@ -78,7 +81,6 @@ $_SESSION = [];
 
 </div>
 
-
                     </div>
                 </div>
 
@@ -102,6 +104,12 @@ $_SESSION = [];
         <div class="col"></div> <!-- end invisible col -->
     </div>
 </div>
+
+<?php
+print_r($_SESSION);
+print(next($_SESSION['QOrder']));
+print_r($_POST);
+?>
    
 </body>
 </html>

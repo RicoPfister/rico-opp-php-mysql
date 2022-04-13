@@ -14,10 +14,10 @@ $DBQuestion = $DBAccess->query("SELECT Question FROM Questions");
 
 include 'randomizer.php';
 
-$currentQID = current($quizQuestionsOrder);
-
+/*
 print_r($quizQuestionsOrder);
 echo "$currentQID";
+*/
 
 $DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = $currentQID AND Questions.QID = Answers.QID");
 
@@ -38,13 +38,20 @@ print_r($question);
 echo "</pre>";
 */
 
-$_SESSION = ["id" => $currentQID, "q" => $a1["Question"], "a1" => $a1["Answer"], "a2" => $a2["Answer"], "a3" => $a3["Answer"], "a4" => $a4["Answer"]];
+$_SESSION["CID"] = $currentQID;
+$_SESSION["q"] = $a1["Question"];
+$_SESSION["a1"] = $a1["Answer"];
+$_SESSION["a2"] = $a2["Answer"];
+$_SESSION["a3"] = $a3["Answer"];
+$_SESSION["a4"] = $a4["Answer"];
 
-print_r($_SESSION);
 
-$_POST = [];
-exit;
 header("Location: /index.php");
+exit;
+
+
+
+
 
 
 
