@@ -10,6 +10,8 @@ $quizQuestionsOrder = [];
 
 if (isset($_POST["newQuiz"])) {
 
+    $_SESSION = [];
+
     for ($i=1; $i<=9; $i++){
 
         $questionsCount = count($QID);
@@ -26,7 +28,7 @@ if (isset($_POST["newQuiz"])) {
     elseif (isset($_SESSION['CID'])){
 
         if ($_SESSION['QOrder'] == null){            
-            header("Location: /evaluation.php");
+            header("Location: /php/evaluation.php");
             exit();
         }
 

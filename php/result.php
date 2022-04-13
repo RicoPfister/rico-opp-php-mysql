@@ -2,12 +2,7 @@
 
 session_start();
 
-$dbHost = getenv('DB_HOST');
-$dbName= getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
-
-$DBAccess = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
+include 'databaseConnection.php';
 
 $DBQID = $DBAccess->query("SELECT QID FROM Questions");
 $DBQuestion = $DBAccess->query("SELECT Question FROM Questions");
@@ -45,9 +40,27 @@ $_SESSION["a2"] = $a2["Answer"];
 $_SESSION["a3"] = $a3["Answer"];
 $_SESSION["a4"] = $a4["Answer"];
 
+if (isset($_POST["q1"])) {
+    $_SESSION["UA".$a1["QID"]."-1"] = $_POST["q1"];
+}
+
+if (isset($_POST["q2"])) {
+    $_SESSION["UA".$a2["QID"]."-2"] = $_POST["q2"];
+}
+
+if (isset($_POST["q3"])) {
+    $_SESSION["UA".$a3["QID"]."-3"] = $_POST["q3"];
+}
+
+if (isset($_POST["q4"])) {
+    $_SESSION["UA".$a4["QID"]."-4"] = $_POST["q4"];
+}
 
 header("Location: /index.php");
 exit;
+
+
+
 
 
 

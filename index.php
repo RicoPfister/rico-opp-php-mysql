@@ -7,6 +7,7 @@ if (isset($_SESSION["a1"])) $answer1Text = $_SESSION["a1"]; else $answer1Text = 
 if (isset($_SESSION["a2"])) $answer2Text = $_SESSION["a2"]; else $answer2Text = "";
 if (isset($_SESSION["a3"])) $answer3Text = $_SESSION["a3"]; else $answer3Text = "";
 if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = "";
+if (isset($_SESSION["CID"])) $questionNumber = $_SESSION["CID"]; else $questionNumber = "";
 
 // $_SESSION = [];
 
@@ -47,7 +48,7 @@ if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = 
 
             <div class="row questionBox mt-2 bg-light"> <!-- quiz nav bar -->
                 <div class="col">
-                    <p><?=$questionText?></p> <!-- title text -->
+                    <p>Frage <?=$questionNumber?>: <?=$questionText?></p> <!-- title text -->
                 </div>
             </div>
 
@@ -59,24 +60,23 @@ if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = 
                     <div class="col">                    
           
                     <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <input class="form-check-input" type="radio" name="q1" value="1" id="flexRadioDefault2">
   <label class="form-check-label" for="flexRadioDefault2"><?=$answer1Text?></label>
 </div>
 
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2"><?=$answer2Text?></label>
+<input class="form-check-input" type="radio" name="q2" value="1" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2"><?=$answer2Text?></label>
 </div>
 
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2"><?=$answer3Text?></label>
+<input class="form-check-input" type="radio" name="q3" value="1" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2"><?=$answer3Text?></label>
 </div>
 
-
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2"><?=$answer4Text?></label>
+<input class="form-check-input" type="radio" name="q4" value="1" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2"><?=$answer4Text?></label>
 </div>
 
 </div>
@@ -94,7 +94,7 @@ if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = 
                         <p>Timer</p> <!-- title text -->
                     </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary">Next</button> <!-- button create quiz -->
+                        <button type="submit" name="s" value="1" class="btn btn-primary">Next</button> <!-- button create quiz -->
                     </div>
                 </div>
             </form>
@@ -104,6 +104,12 @@ if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = 
         <div class="col"></div> <!-- end invisible col -->
     </div>
 </div>
+
+<?php
+
+print_r($_SESSION);
+
+?>
 
 </body>
 </html>
