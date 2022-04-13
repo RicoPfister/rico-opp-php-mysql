@@ -25,9 +25,18 @@ if (isset($_POST["newQuiz"])) {
 
     elseif (isset($_SESSION['CID'])){
 
-        $currentQID  = current($_SESSION['QOrder']);
-        $currentQID  = next($_SESSION['QOrder']);
+        if ($_SESSION['QOrder'] == null){            
+            header("Location: /evaluation.php");
+            exit();
+        }
+
+        else{
+            $currentQID  = end($_SESSION['QOrder']);
+            array_pop($_SESSION['QOrder']);
+        }
 
     }
+
+
 
 ?>

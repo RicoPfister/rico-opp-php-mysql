@@ -105,11 +105,5 @@ if (isset($_SESSION["a4"])) $answer4Text = $_SESSION["a4"]; else $answer4Text = 
     </div>
 </div>
 
-<?php
-print_r($_SESSION);
-print(next($_SESSION['QOrder']));
-print_r($_POST);
-?>
-   
 </body>
 </html>
