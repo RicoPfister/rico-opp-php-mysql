@@ -2,18 +2,65 @@
 
 include 'databaseConnection.php';
 
-// answer evaluation
-$rest = substr("abcdef", 0, -1)
+$points = 0;
 
+$DBCorrectAnswers = $DBAccess->query("SELECT CorrectAnswer FROM Answers WHERE CorrectAnswer = 1"); // total possible points
+$CorrectAnswers = $DBCorrectAnswers->fetchALL(PDO::FETCH_ASSOC);
+$sumCorrectAnswers = count($CorrectAnswers);
 
+foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show question overview array
 
+    $UQID = substr($userQuestion, 2); // trimmed user question number
+    $DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID AND Questions.QID = $UQID"); // select question number array
+    $answerNumber = $DBQuestionAnswer->fetchALL(PDO::FETCH_ASSOC); // gather all question/answer data
 
+    /*
+    echo "<pre>";
+    print_r($answerNumber);
+    echo "</pre>";
+    */
 
+    for($i=1; $i<5; $i++){
+        if (isset($_SESSION["userdata"][$userQuestion]["UA".$UQID."-$i"])){ // check if the answer 1-4 is set by user            
+            
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) {
+                ${"answer".$i."Color"} = "green";
+                $points++; 
 
+            } else {                
+                ${"answer".$i."Color"} = "red"; // check if the user answer is correct. set color
+                $points--; 
+            }
 
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
+        }
 
+        else { // when the answer 1-4 was not set
+            
+            ${"answer".$i."Color"} = "black";
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
+        }
+    
+    }  
 
-$totalPoints = 9;
+    /*
+    $answer1Num = substr("q1-4", 3, 3); // trim down to answer number
+    $answer2Num = substr("q1-4", 3, 3); // trim down to answer number
+    $answer3Num = substr("q1-4", 3, 3); // trim down to answer number
+    $answer4Num = substr("q1-4", 3, 3); // trim down to answer number
+    */
+
+    echo "<h6>Frage $UQID: ".$answerNumber[0]['Question']."<h6><br>";
+    echo "<div style='color:$answer1Color; text-decoration:$answer1FontDeco'>".$answerNumber[0]['Answer']."</div>";
+    echo "<div style='color:$answer2Color; text-decoration:$answer2FontDeco'>".$answerNumber[1]['Answer']."</div>";
+    echo "<div style='color:$answer3Color; text-decoration:$answer3FontDeco'>".$answerNumber[2]['Answer']."</div>";
+    echo "<div style='color:$answer4Color; text-decoration:$answer4FontDeco'>".$answerNumber[3]['Answer']."</div><hr>"; // draw a line before new section
+}
+
+echo "<pre>";
+print_r($_SESSION["userdata"]);
+echo "</pre>";
+
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +92,7 @@ $totalPoints = 9;
 
         <div class="col mt-3">
 
-            <p>Gesamtpunktzahl: <?=$totalPoints?> von 9 Punkten.</p>
+            <p>Gesamtpunktzahl: <?=$points?> von <?=$sumCorrectAnswers?> Punkten.</p>
 
         </div>
         
@@ -54,13 +101,6 @@ $totalPoints = 9;
         <div class="row mt-3">
 
             <div>
-
-                    <h2>Detailauswertung</h2><br>
-                    <p>Frage 1: </p>
-                    <p>Antwort1: </p>
-                    <p>Antwort2: </p>
-                    <p>Antwort3: </p>
-                    <p>Antwort4: </p>
 
             </div>
 
@@ -72,9 +112,9 @@ $totalPoints = 9;
 
         <div class="col mt-5 d-flex justify-content-center">
 
-            <form action="/index.php" method="POST">
-            <button type="submit" name="newquiz" value ="1" class="btn btn-primary me-3">New Quiz</button>
-            <button type="submit" name="createquiz" value ="1" class="btn btn-primary">Create Quiz</button>
+            <form action="/php/result.php" method="POST">
+            <button type="submit" class="btn btn-primary" name="newQuiz" value="1">New Quiz</button> <!-- button new quiz -->
+            <button type="submit" name="createquiz" value ="1" class="btn btn-primary">Create Quiz Question</button>
             </form>
 
         </div>

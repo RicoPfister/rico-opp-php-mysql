@@ -41,19 +41,19 @@ $_SESSION["a3"] = $a3["Answer"];
 $_SESSION["a4"] = $a4["Answer"];
 
 if (isset($_POST["q1"])) {
-    $_SESSION["UA".$a1["QID"]."-1"] = $_POST["q1"];
+    $_SESSION["userdata"]["UQ".$currentQID]["UA".$a1["QID"]."-1"] = $_POST["q1"];
 }
 
 if (isset($_POST["q2"])) {
-    $_SESSION["UA".$a2["QID"]."-2"] = $_POST["q2"];
+    $_SESSION["userdata"]["UQ".$currentQID]["UA".$a2["QID"]."-2"] = $_POST["q2"];
 }
 
 if (isset($_POST["q3"])) {
-    $_SESSION["UA".$a3["QID"]."-3"] = $_POST["q3"];
+    $_SESSION["userdata"]["UQ".$currentQID]["UA".$a3["QID"]."-3"] = $_POST["q3"];
 }
 
 if (isset($_POST["q4"])) {
-    $_SESSION["UA".$a4["QID"]."-4"] = $_POST["q4"];
+    $_SESSION["userdata"]["UQ".$currentQID]["UA".$a4["QID"]."-4"] = $_POST["q4"];
 }
 
 header("Location: /index.php");
