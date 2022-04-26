@@ -13,3 +13,7 @@ body {
 .questionBox {
     height: 5rem;
 }
+
+.amountQuestions {
+    width: 50px;
+}

@@ -50,11 +50,11 @@ foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show questio
     $answer4Num = substr("q1-4", 3, 3); // trim down to answer number
     */
 
-    echo "<h6>Frage $UQID: ".$answerNumber[0]['Question']."<h6><br>";
-    echo "<div style='color:$answer1Color; text-decoration:$answer1FontDeco'>".$answerNumber[0]['Answer']."</div>";
-    echo "<div style='color:$answer2Color; text-decoration:$answer2FontDeco'>".$answerNumber[1]['Answer']."</div>";
-    echo "<div style='color:$answer3Color; text-decoration:$answer3FontDeco'>".$answerNumber[2]['Answer']."</div>";
-    echo "<div style='color:$answer4Color; text-decoration:$answer4FontDeco'>".$answerNumber[3]['Answer']."</div><hr>"; // draw a line before new section
+    echo "<h6>Frage $UQID: ".$answerNumber[0]['QuestionDE']."<h6><br>";
+    echo "<div style='color:$answer1Color; text-decoration:$answer1FontDeco'>".$answerNumber[0]['AnswerDE']."</div>";
+    echo "<div style='color:$answer2Color; text-decoration:$answer2FontDeco'>".$answerNumber[1]['AnswerDE']."</div>";
+    echo "<div style='color:$answer3Color; text-decoration:$answer3FontDeco'>".$answerNumber[2]['AnswerDE']."</div>";
+    echo "<div style='color:$answer4Color; text-decoration:$answer4FontDeco'>".$answerNumber[3]['AnswerDE']."</div><hr>"; // draw a line before new section
 }
 
 echo "<pre>";
