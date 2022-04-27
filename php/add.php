@@ -42,44 +42,73 @@ if (isset($_SESSION["CID"])) $questionNumber = $_SESSION["CID"]; else $questionN
                     
                     <input type="text" class="amountQuestions form-control me-2" name="aq" placeholder=""> 
                     <button type="submit" class="btn btn-dark me-2" name="newQuiz" value="1">New Question(s)</button> <!-- button new quiz -->
-                    <button type="submit" class="btn btn-dark" name="addQuestion" value="1">Add Question</button> <!-- button create quiz -->
+                    <button type="submit" class="btn btn-dark" name="AddQuestion" value="1" disabled>Add Question</button> <!-- button create quiz -->
                     </form>
-    
+        
                 </div>                                  
             </div>
+            
+            <div class="row addQuestionBox mt-2 bg-light"> <!-- quiz question block -->
 
-            <div class="row questionBox mt-2 bg-light"> <!-- quiz question block -->
+            <form action="/php/result.php" method="POST">           
+            
                 <div class="col">
-                    <p>Frage <?=$questionNumber?>: <?=$questionText?></p> <!-- title text -->
+               
+                <div class="my-2 mx-4">
+    
+                <label for="comment">Your Question:</label>
+      <textarea class="form-control" rows="2" id="comment" name="text"></textarea>
+
+</div>                   
                 </div>
             </div>
 
-            <div class="row"> <!-- quiz answer/footer block -->
-
-                <form action="/php/result.php" method="POST">
+            <div class="row"> <!-- quiz answer/footer block -->              
 
                     <div class="row mt-1 bg-light"> <!-- quiz answer block --> 
-                        <div class="col">                    
-            
+                        <div class="col">
+                            
+                            <div class="my-2"></div>
+                            
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" name="qr" value="1" id="a1">
-                                <label class="form-check-label" for="a1"><?=$answer1Text?></label>
+                                <label class="form-check-label" for="a1t">Answer 1. Tick if the answer is correct:</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="form-check-input me-2" id="a1c" name="a1">
+                                    <input type="text" class="form-control" id="a1" name="a1t">
+                                </div>
                             </div>
 
+                            <div class="my-2"></div>
+                            
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" name="qr" value="2" id="a2">
-                                <label class="form-check-label" for="a2"><?=$answer2Text?></label>
+                                <label class="form-check-label" for="a1t">Answer 2. Tick if the answer is correct:</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="form-check-input me-2" id="a1c" name="a1">
+                                    <input type="text" class="form-control" id="a1" name="a1t">
+                                </div>
                             </div>
 
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" name="qr" value="3" id="a3">
-                                <label class="form-check-label" for="a3"><?=$answer3Text?></label>
-                            </div>
+                            <div class="my-2"></div>
 
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" name="qr" value="4" id="a4">
-                                <label class="form-check-label" for="a4"><?=$answer4Text?></label>
+                                <label class="form-check-label" for="a1t">Answer 3. Tick if the answer is correct:</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="form-check-input me-2" id="a1c" name="a1">
+                                    <input type="text" class="form-control" id="a1" name="a1t">
+                                </div>
                             </div>
+
+                            <div class="my-2"></div>
+
+                            <div class="form-check">
+                                <label class="form-check-label" for="a1t">Answer 4. Tick if the answer is correct:</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="form-check-input me-2" id="a1c" name="a1">
+                                    <input type="text" class="form-control" id="a1" name="a1t">
+                                </div>
+                            </div>
+                            
+                            <div class="my-3"></div>
 
                         </div>
 

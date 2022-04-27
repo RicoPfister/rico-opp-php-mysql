@@ -4,9 +4,8 @@ include 'databaseConnection.php';
 
 $points = 0;
 
-$DBCorrectAnswers = $DBAccess->query("SELECT CorrectAnswer FROM Answers WHERE CorrectAnswer = 1"); // total possible points
-$CorrectAnswers = $DBCorrectAnswers->fetchALL(PDO::FETCH_ASSOC);
-$sumCorrectAnswers = count($CorrectAnswers);
+$_maxPoints = $_SESSION['MaxPoints'];
+$_maxMistakes = $_SESSION['MaxMistakes'];
 
 foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show question overview array
 
@@ -92,7 +91,7 @@ echo "</pre>";
 
         <div class="col mt-3">
 
-            <p>Gesamtpunktzahl: <?=$points?> von <?=$sumCorrectAnswers?> Punkten.</p>
+            <p>Gesamtpunktzahl: <?=$points?> von maximal <?=$_maxPoints?> Punkt(en) (Maximale Fehleranzahl: <?=$_maxMistakes?>).</p>
 
         </div>
         

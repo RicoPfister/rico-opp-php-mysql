@@ -14,6 +14,14 @@ body {
     height: 5rem;
 }
 
+.addQuestionBox {
+    height: 7rem;
+}
+
 .amountQuestions {
     width: 50px;
 }
+
+textarea {
+    resize: none;
+ }

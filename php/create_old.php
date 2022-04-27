@@ -41,7 +41,7 @@ if (isset($_SESSION["CID"])) $questionNumber = $_SESSION["CID"]; else $questionN
                     <button type="submit" class="btn btn-primary" name="newQuiz" value="1">New Quiz</button><!-- button new quiz -->
             </div>
             <div class="col">
-                    <button type="submit" class="btn btn-primary">Create Quiz</button><!-- button create quiz -->
+                    <button type="submit" class="btn btn-primary" name="newQuiz" value="1">Create Quiz</button><!-- button create quiz -->
                 </form>
             </div>
         </div>
