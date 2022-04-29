@@ -10,12 +10,16 @@ $quizQuestionsOrder = [];
 $_maxPoints = 0;
 $_maxMistakes = 0;
 
+if(isset($_POST['newQuiz'])){
+    $_SESSION['newQuiz'] = 1;
+}
+
 if (isset($_POST['addQuestion'])){
-    header("Location: /php/add.php");
+    header("Location: add.php");
     exit;
 }
 
-if (isset($_POST["newQuiz"])) {
+if (isset($_SESSION["newQuiz"])) {
 
     if (isset($_POST["aq"]) && ($_POST["aq"]) != "") $amountOfQuestions = $_POST["aq"]; else $amountOfQuestions = 5; // set number of questions for next quiz
    
@@ -50,6 +54,8 @@ if (isset($_POST["newQuiz"])) {
     $DBCorrectAnswers = $DBAccess->query("SELECT CorrectAnswer FROM Answers WHERE CorrectAnswer = 1"); // total possible points
     $CorrectAnswers = $DBCorrectAnswers->fetchALL(PDO::FETCH_ASSOC);
     $_SESSION["NumCorAns"] = count($CorrectAnswers);
+
+    unset($_SESSION['newQuiz']);
 }
 
     elseif (isset($_POST["qr"]) || isset($_POST["q1"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) ){ // check if a quiz has already been startet

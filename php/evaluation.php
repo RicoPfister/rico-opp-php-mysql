@@ -19,26 +19,37 @@ foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show questio
     echo "</pre>";
     */
 
+    echo "<h6>Frage $UQID: ".$answerNumber[0]['QuestionDE']."<h6>";   
+
     for($i=1; $i<5; $i++){
         if (isset($_SESSION["userdata"][$userQuestion]["UA".$UQID."-$i"])){ // check if the answer 1-4 is set by user            
             
-            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) {
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) { // check if the user answer is correct. if yes = green
                 ${"answer".$i."Color"} = "green";
-                $points++; 
+                $points+=1; 
 
             } else {                
-                ${"answer".$i."Color"} = "red"; // check if the user answer is correct. set color
-                $points--; 
+                ${"answer".$i."Color"} = "red"; // check if the user answer is correct. if no = red
+                $points+=0; 
             }
-
-            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
-        }
-
-        else { // when the answer 1-4 was not set
             
-            ${"answer".$i."Color"} = "black";
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
+            echo "<div style='color:${"answer".$i."Color"}; text-decoration:${"answer".$i."FontDeco"}'>".$answerNumber[$i-1]['AnswerDE']."</div>";
+        }
+
+        elseif (isset($answerNumber[$i-1])) {
+            ${"answer".$i."Color"} = "black"; // when the answer 1-4 was not set
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
+            echo "<div style='color:${"answer".$i."Color"}; text-decoration:${"answer".$i."FontDeco"}'>".$answerNumber[$i-1]['AnswerDE']."</div>";
+        } 
+
+        /*
+        else { // when the answer 1-4 was not set
+            ${"answer".$i."Color"} = "black";            
+            
             if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
         }
+        */      
     
     }  
 
@@ -48,32 +59,20 @@ foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show questio
     $answer3Num = substr("q1-4", 3, 3); // trim down to answer number
     $answer4Num = substr("q1-4", 3, 3); // trim down to answer number
     */
-
-    echo "<h6>Frage $UQID: ".$answerNumber[0]['QuestionDE']."<h6><br>";
-    echo "<div style='color:$answer1Color; text-decoration:$answer1FontDeco'>".$answerNumber[0]['AnswerDE']."</div>";
-    echo "<div style='color:$answer2Color; text-decoration:$answer2FontDeco'>".$answerNumber[1]['AnswerDE']."</div>";
-    echo "<div style='color:$answer3Color; text-decoration:$answer3FontDeco'>".$answerNumber[2]['AnswerDE']."</div>";
-    echo "<div style='color:$answer4Color; text-decoration:$answer4FontDeco'>".$answerNumber[3]['AnswerDE']."</div><hr>"; // draw a line before new section
+    
+    echo "<hr>";
+  
 }
 
+/*
 echo "<pre>";
 print_r($_SESSION["userdata"]);
 echo "</pre>";
+*/
+
+include 'header.php';
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/quiz.css"/>
-    <title>Auswertung</title>
-</head>
-<body>
 
 <div class="container">
 
@@ -91,7 +90,7 @@ echo "</pre>";
 
         <div class="col mt-3">
 
-            <p>Gesamtpunktzahl: <?=$points?> von maximal <?=$_maxPoints?> Punkt(en) (Maximale Fehleranzahl: <?=$_maxMistakes?>).</p>
+            <p>Gesamtpunktzahl: <?=$points?> von <?=$_maxPoints?> Punkt(en).</p>
 
         </div>
         
@@ -113,7 +112,7 @@ echo "</pre>";
 
             <form action="/php/result.php" method="POST">
             <button type="submit" class="btn btn-primary" name="newQuiz" value="1">New Quiz</button> <!-- button new quiz -->
-            <button type="submit" name="createquiz" value ="1" class="btn btn-primary">Create Quiz Question</button>
+            <button type="submit" name="addQuestion" value ="1" class="btn btn-primary">Add Question</button>
             </form>
 
         </div>

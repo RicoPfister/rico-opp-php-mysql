@@ -15,11 +15,24 @@ echo "$currentQID";
 */
 
 $DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = $currentQID AND Questions.QID = Answers.QID");
+$allQuestionData = $DBQuestionAnswer->fetchALL(PDO::FETCH_ASSOC);
 
-$a1 = $DBQuestionAnswer->fetch(PDO::FETCH_ASSOC); // get 1st database question related data
-$a2 = $DBQuestionAnswer->fetch(PDO::FETCH_ASSOC); // get 2nd database question related data
-$a3 = $DBQuestionAnswer->fetch(PDO::FETCH_ASSOC); // get 3rd database question related data
-$a4 = $DBQuestionAnswer->fetch(PDO::FETCH_ASSOC); // get 4th database question related data
+$_SESSION["CID"] = $currentQID; 
+$_SESSION["q"] = $allQuestionData[0]["QuestionDE"]; // set current question title to session array
+
+// write from database to session array
+
+for($i=0; $i<4; $i++){
+
+    if (isset($allQuestionData[$i])) $_SESSION["a".$i+1] = $allQuestionData[$i]['AnswerDE'];
+    
+}
+
+/*
+echo "<pre>";
+print_r($allQuestionData);
+echo "</pre>";
+*/
 
 /*
 echo "<pre>";
@@ -37,14 +50,8 @@ echo "</pre>";
 print_r($_SESSION);*/
 
 // fill in current question/answers
-$_SESSION["CID"] = $currentQID; 
-$_SESSION["q"] = $a1["QuestionDE"]; // set current question title to session array
-$_SESSION["a1"] = $a1["AnswerDE"]; // set 1st database question related data to session array
-$_SESSION["a2"] = $a2["AnswerDE"]; // set 2nd database question related data to session array
-$_SESSION["a3"] = $a3["AnswerDE"]; // set 3rd database question related data to session array
-$_SESSION["a4"] = $a4["AnswerDE"]; // set 4th database question related data to session array
 
-// fill in previous answers
+// write previous question and user answers to the session array
 if (isset($_POST["qr"])) { // set radio answer to session array UA array
     $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-".$_POST["qr"]] = 1;    
 }

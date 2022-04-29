@@ -1,17 +1,18 @@
 body {
+    background-image: url("/images/background3.jpg");
     background-color: lightgrey;
   }
-
-.quizContainer {
-    margin-top: 10rem;
-}
 
 .navBar {
     height: 100px;
 }
 
 .questionBox {
-    height: 5rem;
+    background: rgb(200,200,200);
+}
+
+.answerBox {
+    background: rgb(220,220,220);
 }
 
 .addQuestionBox {
@@ -25,3 +26,18 @@ body {
 textarea {
     resize: none;
  }
+
+@media (min-width: 576px) {
+    .quizContainer {
+        margin-top: 7rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .quizContainer {
+        margin-top: 13rem;
+    }
+}
+
+
+
