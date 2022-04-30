@@ -20,7 +20,7 @@ body {
 }
 
 .amountQuestions {
-    width: 50px;
+    width: 70px;
 }
 
 textarea {
@@ -29,14 +29,18 @@ textarea {
 
 @media (min-width: 576px) {
     .quizContainer {
-        margin-top: 7rem;
+        margin-top: 4rem;
     }
 }
 
 @media (min-width: 1200px) {
     .quizContainer {
-        margin-top: 13rem;
+        margin-top: 10rem;
     }
+}
+
+#validationMessage {
+    color: red;
 }
 
 

@@ -58,7 +58,7 @@ if (isset($_SESSION["newQuiz"])) {
     unset($_SESSION['newQuiz']);
 }
 
-    elseif (isset($_POST["qr"]) || isset($_POST["q1"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) ){ // check if a quiz has already been startet
+    elseif (isset($_POST["sent"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) ){ // check if a quiz has already been startet
 
         if ($_SESSION['QOrder'] == null){ // if no question numbers are left go to the evaluation page            
             header("Location: /php/evaluation.php");

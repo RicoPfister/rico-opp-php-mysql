@@ -3,11 +3,16 @@
 include 'databaseConnection.php';
 
 $points = 0;
+$mistakes = 0;
 
 $_maxPoints = $_SESSION['MaxPoints'];
-$_maxMistakes = $_SESSION['MaxMistakes'];
+$_maxMistakes = $_SESSION['MaxMistakes']+$_maxPoints;
 
 foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show question overview array
+
+    $userTotalCorrectAnswers = 0;
+    $questionTotalCorrectAnswers = 0;
+    $userTotalWrongAnswers = 0;
 
     $UQID = substr($userQuestion, 2); // trimmed user question number
     $DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID AND Questions.QID = $UQID"); // select question number array
@@ -19,28 +24,49 @@ foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show questio
     echo "</pre>";
     */
 
-    echo "<h6>Frage $UQID: ".$answerNumber[0]['QuestionDE']."<h6>";   
-
+    echo "<h6 class='mb-3 fw-bold'>Frage $UQID: ".$answerNumber[0]['QuestionDE']."<h6>";
+    
     for($i=1; $i<5; $i++){
+
+        ${"dingbat".$i} = "";
+
         if (isset($_SESSION["userdata"][$userQuestion]["UA".$UQID."-$i"])){ // check if the answer 1-4 is set by user            
-            
+                       
             if ($answerNumber[$i-1]["CorrectAnswer"] == 1) { // check if the user answer is correct. if yes = green
-                ${"answer".$i."Color"} = "green";
+                ${"answer".$i."Color"} = "bg-success";
+                $userTotalCorrectAnswers += 1;
                 $points+=1; 
 
             } else {                
-                ${"answer".$i."Color"} = "red"; // check if the user answer is correct. if no = red
-                $points+=0; 
+                ${"answer".$i."Color"} = "bg-danger"; // check if the user answer is correct. if no = red
+                ${"dingbat".$i} = '&#10006;';
+                $userTotalWrongAnswers += 1;
+                $mistakes+=1;
+                $points+=1; 
             }
             
-            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
-            echo "<div style='color:${"answer".$i."Color"}; text-decoration:${"answer".$i."FontDeco"}'>".$answerNumber[$i-1]['AnswerDE']."</div>";
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) {
+
+                ${'answer'.$i.'IsCorrect'} = "border border-3 border-success";
+                ${"dingbat".$i} = '&#10004;';
+                $questionTotalCorrectAnswers += 1;
+                
+            } else ${'answer'.$i.'IsCorrect'} = ""; // check if the user answer is correct. set font weight
+            echo "<div class='my-2'><span class='my-3 ${'answer'.$i.'Color'} ${'answer'.$i.'IsCorrect'}'>".$answerNumber[$i-1]['AnswerDE']."</span> ${"dingbat".$i}</div>";
         }
 
         elseif (isset($answerNumber[$i-1])) {
-            ${"answer".$i."Color"} = "black"; // when the answer 1-4 was not set
-            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) ${"answer".$i."FontDeco"} = "underline"; else ${"answer".$i."FontDeco"} = ""; // check if the user answer is correct. set font weight
-            echo "<div style='color:${"answer".$i."Color"}; text-decoration:${"answer".$i."FontDeco"}'>".$answerNumber[$i-1]['AnswerDE']."</div>";
+            
+            ${"answer".$i."Color"} = ""; // when the answer 1-4 was not set
+            if ($answerNumber[$i-1]["CorrectAnswer"] == 1) {
+                ${'answer'.$i.'IsCorrect'} = "border border-3 border-success";
+                ${"dingbat".$i} = '&#10006;';
+                $questionTotalCorrectAnswers += 1;
+                $userTotalWrongAnswers += 1;
+                $mistakes+=1;
+
+            } else ${'answer'.$i.'IsCorrect'} = ""; // check if the user answer is correct. set font weight
+            echo "<div class='my-2'><span class='my-3 ${'answer'.$i.'Color'} ${'answer'.$i.'IsCorrect'}'>".$answerNumber[$i-1]['AnswerDE']."</span> ${"dingbat".$i}</div>";
         } 
 
         /*
@@ -52,6 +78,8 @@ foreach($_SESSION["userdata"] as $userQuestion => $userAnswer) { // show questio
         */      
     
     }  
+
+    echo "<p class='mt-3 '>Correct/Wrong: <b>".$userTotalCorrectAnswers."/".$userTotalWrongAnswers."</b><p>"; 
 
     /*
     $answer1Num = substr("q1-4", 3, 3); // trim down to answer number
@@ -90,7 +118,7 @@ include 'header.php';
 
         <div class="col mt-3">
 
-            <p>Gesamtpunktzahl: <?=$points?> von <?=$_maxPoints?> Punkt(en).</p>
+            <p>Total correct/wrong: <?=$points?>/<?=$mistakes?>. Maximal correct/wrong: <?=$_maxPoints?>/<?=$_maxMistakes?></p>
 
         </div>
         

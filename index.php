@@ -24,7 +24,7 @@ include 'php/header.php';
         <div class="col"></div> <!-- start invisible col -->
 
         <div class="col-xl-6 max-vh-100 quizContainer"> <!-- quiz container -->
-        <form action="/php/result.php" method="POST">
+        <form action="/php/result.php" method="POST" onsubmit="return evaluateNewQuizLimit()">
             <div class="row m-0"> <!-- quiz header block -->    
                
                 <div class="col colHeader d-sm-flex m-0 p-0">
@@ -36,7 +36,7 @@ include 'php/header.php';
                     <div class="col d-flex justify-content-end"> <!-- header whole button box -->
                     
                         <div class="col-auto d-flex justify-content-end"> <!-- header new quiz box-->
-                            <input type="text" class="amountQuestions form-control me-2 border-dark" name="aq" placeholder=""> 
+                            <input type="number" class="amountQuestions form-control me-2 border-dark" name="aq" id="userNewQuiz" placeholder=""> 
                             <button type="submit" class="btn btn-dark me-2" name="newQuiz" value="1"><div class="d-none d-sm-block">New Question(s)</div><div class="d-block d-sm-none">N</div></button> <!-- button new quiz - change text if smaller/bigger than sm-->
                         </div>
 
@@ -51,7 +51,7 @@ include 'php/header.php';
             
             <div class="row questionBox mx-0 mt-2"> <!-- quiz question block -->
 
-            <form action="/php/result.php" method="POST">
+            <form action="/php/result.php" onsubmit="return evaluateAnswer()" method="POST">
             
                 <div class="col">
               
@@ -72,21 +72,19 @@ include 'php/header.php';
                         <?php
 
                         echo "<div class='mt-3'></div>";
+                       
+                        if (isset($_SESSION['tCa']) && $_SESSION['tCa'] == 1){ // create radio boxes if only 1 answer is correct
                         
-                        for($i=1; $i<5; $i++){
-
-                            if(isset($_SESSION["a".$i])) {
-
-                                echo "
-                                <div class='form-check'>
-                                    <input type='radio' class='form-check-input' name='qr' id='a$i' value='1'>
-                                    <label class='form-check-label' for='a$i'>".${"answer".$i."Text"}."</label>
-                                </div>
-                                ";
-                            }
-
-                        echo "<div class='mb-3'></div>";
+                            include 'php/question-type-radio.php';       
                         }
+
+                        else { // otherwise create check boxes
+                        
+                            include 'php/question-type-check.php';         
+                        }
+
+                        echo "<p id='validationMessage'></p>";
+
                         ?>
 
                         </div>
@@ -96,8 +94,9 @@ include 'php/header.php';
 
                     <div class="row mt-2"> <!-- quiz footer block -->   
                         <div class="col d-flex justify-content-between">
-                            <button type="submit" class="btn btn-danger">Back</button> <!-- button new quiz -->      
-                            <button type="submit" class="btn btn-success">Next</button> <!-- button create quiz -->
+                            <button type="submit" class="btn btn-danger">Back</button> <!-- button new quiz -->
+                            <p>Questions Quiz: <span id="currentQuizQuestion">1/</span><span id="totalQuizQuestions">5</span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p>      
+                            <button type="submit" class="btn btn-success" name="sent" value="1">Next</button> <!-- button create quiz -->
                         </div>
                     </div>
                 </form>
@@ -121,6 +120,8 @@ print_r($_POST);
 echo "</pre>"
 */
 ?>
+
+<script src="/js/validation.js"></script>
 
 </body>
 </html>
