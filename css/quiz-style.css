@@ -7,8 +7,19 @@ body {
     height: 100px;
 }
 
-.questionBox {
+.questionBoxAdd {
     background: rgb(200,200,200);
+    height: 7rem;
+}
+
+.questionBoxQuestion {
+    background: rgb(200,200,200);
+    height: 5rem;
+}
+
+.questionBoxEvaluation {
+    background: rgb(200,200,200);
+    height: 6rem;
 }
 
 .answerBox {

@@ -37,7 +37,7 @@ include 'dev-console.php';
                 <div class="col colHeader d-sm-flex m-0 p-0">
 
                     <div class="col-auto d-flex align-items-center m-0 p-0">
-                        <h5 class="m-0 p-0">Quiz Generator</h5> <!-- title text -->
+                        <h4 class="m-0 p-0">Quiz Generator</h4> <!-- title text -->
                     </div>
                     
                     <div class="col d-flex justify-content-end"> <!-- header whole button box -->
@@ -56,7 +56,7 @@ include 'dev-console.php';
                 </div>                                  
             </div>
             
-            <div class="row questionBox mx-0 mt-2"> <!-- quiz question block -->
+            <div class="row questionBoxEvaluation mx-0 mt-2"> <!-- quiz question block -->
 
             <form action="/php/result.php" onsubmit="return evaluateAnswer()" method="POST">
             
@@ -64,17 +64,17 @@ include 'dev-console.php';
               
                     <div class="mt-3 mb-0 ms-3 pb-0 mx-4">
         
-                        <h3>Evaluation</h3>
-                        <p class="mt-3 mb-1 pb-1">You have finished the quiz. Here is the evaluation and a final score:</p>
+                        <h4 class="p-0 m-0">Evaluation</h4>
+                        <p class="my-2 pb-1">You have finished the quiz. Here is the evaluation and a final score:</p>
                     </div>
                     
                 </div>
             </div>
 
-            <div class="row mx-0 mt-0"> <!-- quiz answer/footer block -->                
+            <div class="row mx-0 mt-0 mb-0"> <!-- quiz answer/footer block -->                
 
                 <div class="row answerBox mt-2 mx-0"> <!-- quiz answer block --> 
-                    <div class="col-sm-lg mt-3 mb-3">
+                    <div class="col-sm-lg mt-3 mb-1">
                                         
                         <?php
 
@@ -152,10 +152,10 @@ include 'dev-console.php';
                             
                             ?>
 
-                        <p class="mt-3 mb-1 pb-1"><?=$points?> correct answers out of a maximum of <?=$_maxPoints?>.</p>
+                        <p class="mt-0 mb-0 pb-1"><?=$points?> correct answers out of a maximum of <?=$_maxPoints?>.</p>
                         <p><?=$mistakes?> wrong answers out of a maximum of <?=$_maxMistakes?>.</p>
 
-                        <p class="mt-3 mb-1 pb-1"><?=$evaluationText[$evaluationTextIndex]?></p>
+                        <p class="mt-0 mb-0 pb-1"><?=$evaluationText[$evaluationTextIndex]?></p>
 
                     </div>
 

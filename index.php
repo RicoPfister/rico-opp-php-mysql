@@ -31,7 +31,7 @@ include 'php/dev-console.php';
                 <div class="col colHeader d-sm-flex m-0 p-0">
 
                     <div class="col-auto d-flex align-items-center m-0 p-0">
-                        <h5 class="m-0 p-0">Quiz Generator</h5> <!-- title text -->
+                        <h4 class="m-0 p-0">Quiz Generator</h4> <!-- title text -->
                     </div>
                     
                     <div class="col d-flex justify-content-end"> <!-- header whole button box -->
@@ -50,7 +50,7 @@ include 'php/dev-console.php';
                 </div>                                  
             </div>
             
-            <div class="row questionBox mx-0 mt-2"> <!-- quiz question block -->
+            <div class="row questionBoxQuestion mx-0 mt-2"> <!-- quiz question block -->
 
             <form action="/php/result.php" onsubmit="return evaluateAnswer()" method="POST">
             
@@ -99,7 +99,7 @@ include 'php/dev-console.php';
                             <p id="infoBar" class="m-0 p-0 order-2">Questions Quiz: <span id="currentQuizQuestion"><?=$_SESSION['CQI']+1?>/</span><span><?=$_SESSION['aq']?></span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p> <!-- display question status of quiz/database -->   
                             </form>
                             <form action="/php/result.php" method="POST">
-                                <button type="submit" class="btn btn-danger order-1" id="back" name="back" value="1" <?php if($_SESSION['CQI'] == 0) echo 'disabled';?>>Back</button> <!-- button new quiz -->
+                                <button type="submit" class="btn btn-danger order-1" id="back" name="back" value="1" style="visibility:<?php if($_SESSION['CQI'] == 0) echo 'hidden'; else 'visible';?>">Back</button> <!-- button new quiz -->
                             </form> 
                         </div>
                     </div>
