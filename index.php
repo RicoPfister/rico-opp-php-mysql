@@ -65,7 +65,7 @@ include 'php/dev-console.php';
                 </div>
             </div>
 
-            <div class="row mx-0 mt-"> <!-- quiz answer/footer block -->                
+            <div class="row mx-0"> <!-- quiz answer/footer block -->                
 
                     <div class="row answerBox mt-2 mx-0"> <!-- quiz answer block --> 
                         <div class="col-sm-lg">

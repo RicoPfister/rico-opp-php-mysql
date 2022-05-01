@@ -1,7 +1,7 @@
 body {
     background-image: url("/images/background.jpg");
     background-color: lightgrey;
-  }
+}
 
 .navBar {
     height: 100px;
@@ -48,10 +48,14 @@ textarea {
 }
 
 #devConsole {
-    visibility: hidden;
+    display: none;
     position: absolute;
-    word-wrap: break-word;
-    width: 30rem;    
+    width: 30rem;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+#devConsole h6 {
+    color: blue;  
 }
 
 

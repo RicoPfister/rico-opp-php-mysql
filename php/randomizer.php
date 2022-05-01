@@ -68,7 +68,13 @@ if (isset($_SESSION["newQuiz"])) {
 
                 if (isset($_POST['back'])) {
           
-                        $_SESSION['CQI']--;
+                    $_SESSION['CQI']--;
+
+                    //echo $_SESSION['QOrder'][$_SESSION['CQI']];
+
+                    // remove previous given answers
+                    unset($_SESSION["userdata"]["UQ".$_SESSION['QOrder'][$_SESSION['CQI']]]);
+
                 } else $_SESSION['CQI']++;        
                 
             } else $_SESSION['CQI']++;

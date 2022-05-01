@@ -28,7 +28,7 @@ include 'dev-console.php';
 
 <div class="container">
     <div class="row">
-        <div class="col"></div> <!-- start invisible col -->
+        <div class="col-sm"></div> <!-- start invisible col -->
 
         <div class="col-xl-6 max-vh-100 quizContainer"> <!-- quiz container -->
         <form action="/php/result.php" method="POST" onsubmit="return evaluateNewQuizLimit()">
@@ -163,10 +163,10 @@ include 'dev-console.php';
             </div>      
 
             </div>
-            <div class="col"></div> <!-- end invisible col -->
+            <div class="col-sm"></div> <!-- end invisible col -->
     </div>
 </div>
     
-<?=include 'footer.php';?>
+<?php include 'footer.php';?>
 
 

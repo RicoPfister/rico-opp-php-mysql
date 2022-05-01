@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+$_SESSION['lastPOST'] = $_POST;
 
 include 'databaseConnection.php';
 
@@ -61,31 +62,22 @@ echo "</pre>";
 /*echo $currentQID;
 print_r($_SESSION);*/
 
-// fill in current question/answers
-
 // write previous question and user answers to the session array
-if (isset($_POST["qr"])) { // set radio answer to session array UA array
-    $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-".$_POST["qr"]] = 1;    
-}
 
-elseif (isset($_POST["q1"])) { // set 1st check box answer to session array UA array
-    $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-1"] = 1;
-    
-}
+if (isset($_POST["qr"]) || isset($_POST["q1"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"])){
 
-elseif (isset($_POST["q2"])) { // set 2nd check box answer to session array UA array
-    $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-2"] = 1;
-    
-}
+    if (isset($_POST["qr"])) { // set radio answer to session array UA array
+        
+        $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-".$_POST["qr"]] = 1;    
+    }
 
-elseif (isset($_POST["q3"])) { // set 3rd check box answer to session array UA array
-    $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-3"] = 1;
-    
-}
+    for($i=1; $i<5; $i++){
 
-elseif (isset($_POST["q4"])) { // set 4th check box answer to session array UA array
-    $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-4"] = 1;
-   
+        if (isset($_POST["q".$i])) { // set 1st check box answer to session array UA array
+            $_SESSION["userdata"]["UQ".$_SESSION['PID']]["UA".$_SESSION['PID']."-$i"] = 1;    
+        }
+    }
+
 }
 
 elseif (isset($_POST["sent"])) {
