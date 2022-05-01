@@ -3,6 +3,7 @@ session_start();
 /* print_r($_SESSION); */
 
 include 'header.php';
+include 'dev-console.php';
 
 ?>
 
@@ -47,7 +48,7 @@ include 'header.php';
                 <div class="my-2 mx-3">
     
                 <label for="q">Your Question:</label>
-                <textarea class="form-control" rows="2" id="qq" name="q"></textarea>
+                <textarea class="form-control"  maxlength="80" rows="2" id="qq" name="q"></textarea>
 
 </div>
                     
@@ -114,9 +115,9 @@ include 'header.php';
                 </div>               
 
                     <div class="row mt-2"> <!-- quiz footer block -->   
-                        <div class="col d-flex justify-content-between">
+                        <div class="col d-flex justify-content-between align-items-center">
                             <button type="reset" class="btn btn-danger">Reset</button> <!-- button new quiz -->
-                            <p>Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span> Questions</p>    
+                            <p id="infoBar" class="m-0 p-0">In database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span> Questions</p>    
                             <button type="submit" class="btn btn-success">Send</button> <!-- button create quiz -->
                         </div>
                     </div>

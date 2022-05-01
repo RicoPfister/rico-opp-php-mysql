@@ -5,7 +5,9 @@ function evaluateAddQuestion(){
     let countFilledAnswers = 0;
 
     if (document.getElementById("qq").value === ""){
-        document.getElementById("validationMessage").innerText = "A Question and at least 2 answers are required";
+        /*alert("ok");*/
+        document.getElementById("infoBar").innerHTML = '&#10083; A Question and at least 2 answers are required &#10083; ';
+        document.getElementById("infoBar").style.color = "red";
         return false;
     }
 
@@ -19,7 +21,8 @@ function evaluateAddQuestion(){
 
     if (countFilledAnswers < 2){
 
-        document.getElementById("validationMessage").innerText = "A Question and at least 2 answers are required";
+        document.getElementById("infoBar").innerHTML= "&#10083; A Question and at least 2 answers are required &#10083; ";
+        document.getElementById("infoBar").style.color = 'red';
         countFilledAnswers = 0;
         return false;
     }
@@ -37,7 +40,8 @@ function evaluateAnswer() { // user validation
 
         if(radioButton.length === 0) {
 
-            document.getElementById("validationMessage").innerText = "Please choose an answer (put a tick)";
+            document.getElementById("infoBar").innerHTML = "&#10083; Please choose an answer &#10083; ";
+            document.getElementById("infoBar").style.color = 'red';
             return false;
         }
 
@@ -48,14 +52,17 @@ function evaluateAnswer() { // user validation
 
 function evaluateNewQuizLimit(){
 
-    if (parseInt(document.getElementById('userNewQuiz').value) < 1){
-        document.getElementById("validationMessage").innerText = "Minimum 1 question required";
-        document.getElementById('userNewQuiz').value = "";
+        if (parseInt(document.getElementById('userNewQuiz').value) < 1){
+        document.getElementById("infoBar").innerHTML = "&#10083; Minimum 1 question required &#10083; ";
+        document.getElementById("infoBar").style.color = 'red';
+        document.getElementById("userNewQuiz").value = "";
         return false;
     }
-   
-    if(parseInt(document.getElementById('userNewQuiz').value) > parseInt(document.getElementById('totalQuestions').innerText)) {
-        document.getElementById("validationMessage").innerText = "Maximum "+document.getElementById('totalQuestions').innerText+" questions available";
+    
+    if(parseInt(document.getElementById('userNewQuiz').value) > parseInt(document.getElementById('totalQuizQuestions').innerText)) {
+
+        document.getElementById("infoBar").innerHTML = "&#10083; Maximum "+document.getElementById('totalQuizQuestions').innerText+" questions available &#10083;";
+        document.getElementById("infoBar").style.color = 'red';
         document.getElementById('userNewQuiz').value = "";
         return false;
     }

@@ -50,6 +50,7 @@ if (isset($_SESSION["newQuiz"])) {
 
     $_SESSION['MaxPoints'] = $_maxPoints;
     $_SESSION['MaxMistakes'] = $_maxMistakes;
+    $_SESSION['aq'] = $amountOfQuestions;
     
     $DBCorrectAnswers = $DBAccess->query("SELECT CorrectAnswer FROM Answers WHERE CorrectAnswer = 1"); // total possible points
     $CorrectAnswers = $DBCorrectAnswers->fetchALL(PDO::FETCH_ASSOC);

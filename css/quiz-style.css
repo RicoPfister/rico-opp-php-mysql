@@ -43,5 +43,9 @@ textarea {
     color: red;
 }
 
+#totalQuizQuestions {
+    display: none;
+}
+
 
 

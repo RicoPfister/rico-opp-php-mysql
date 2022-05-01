@@ -16,6 +16,7 @@ if (isset($_SESSION["q"])){
 }
 
 include 'php/header.php';
+include 'php/dev-console.php';
 
 ?>
 
@@ -93,9 +94,9 @@ include 'php/header.php';
                 </div>               
 
                     <div class="row mt-2"> <!-- quiz footer block -->   
-                        <div class="col d-flex justify-content-between">
+                        <div class="col d-flex justify-content-between align-items-center">
                             <button type="submit" class="btn btn-danger">Back</button> <!-- button new quiz -->
-                            <p>Questions Quiz: <span id="currentQuizQuestion">1/</span><span id="totalQuizQuestions">5</span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p>      
+                            <p id="infoBar" class="m-0 p-0">Questions Quiz: <span id="currentQuizQuestion">1/</span><span><?=$_SESSION['aq']?></span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p> <!-- display question status of quiz/database -->   
                             <button type="submit" class="btn btn-success" name="sent" value="1">Next</button> <!-- button create quiz -->
                         </div>
                     </div>
