@@ -94,7 +94,7 @@ elseif (isset($_POST["sent"])) {
 
 if (isset($_SESSION['QOrder'])){ // check if a quiz has already been startet
 
-    if ($_SESSION['QOrder'] == null){ // if no question numbers are left go to the evaluation page            
+    if ($_SESSION['CQI'] == $_SESSION['aq']){ // if no question numbers are left go to the evaluation page            
         header("Location: /php/evaluation.php");
         exit();
     }   

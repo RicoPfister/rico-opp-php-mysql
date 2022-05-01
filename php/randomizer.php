@@ -35,7 +35,7 @@ if (isset($_SESSION["newQuiz"])) {
     }
 
     $_SESSION["QOrder"] = $quizQuestionsOrder; // fill session array qorder array with randomized quiz numbers
-    $currentQID  = end($_SESSION['QOrder']); // set QID the end number of session qorder array
+    $currentQID  = $_SESSION['QOrder'][0]; // set QID the end number of session qorder array
 
     // count maximal points
     foreach($quizQuestionsOrder as $questionOrder => $questionNumber){
@@ -51,6 +51,7 @@ if (isset($_SESSION["newQuiz"])) {
     $_SESSION['MaxPoints'] = $_maxPoints;
     $_SESSION['MaxMistakes'] = $_maxMistakes;
     $_SESSION['aq'] = $amountOfQuestions;
+    $_SESSION['CQI'] = 0; // set current question index
     
     $DBCorrectAnswers = $DBAccess->query("SELECT CorrectAnswer FROM Answers WHERE CorrectAnswer = 1"); // total possible points
     $CorrectAnswers = $DBCorrectAnswers->fetchALL(PDO::FETCH_ASSOC);
@@ -59,19 +60,14 @@ if (isset($_SESSION["newQuiz"])) {
     unset($_SESSION['newQuiz']);
 }
 
-    elseif (isset($_POST["sent"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) ){ // check if a quiz has already been startet
+    elseif (isset($_POST["sent"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) ){ // if a quiz is running go to to next question number in der qorder array and remove the last element from the array
 
-        if ($_SESSION['QOrder'] == null){ // if no question numbers are left go to the evaluation page            
-            header("Location: /php/evaluation.php");
-            exit();
-        }
+            $_SESSION['PID'] = $_SESSION["QOrder"][$_SESSION['CQI']];          
+            $_SESSION['CQI']++;
 
-        else { // if a quiz is running go to to next question number in der qorder array and remove the last element from the array
-            $_SESSION['PID'] = end($_SESSION['QOrder']);          
-            array_pop($_SESSION['QOrder']);
+            //print_r($_SESSION);
 
-            if ($_SESSION['QOrder'] == null) $currentQID  = $_SESSION['PID']; else $currentQID  = end($_SESSION['QOrder']);                              
-        }        
+            if ($_SESSION['CQI'] == $_SESSION['aq']) $currentQID  = $_SESSION['PID']; else $currentQID  = $_SESSION['QOrder'][$_SESSION['CQI']];                               
 
     }
 
