@@ -56,18 +56,18 @@ include 'php/dev-console.php';
             
                 <div class="col">
               
-                <div class="my-3 mx-4">
-    
-                <p>Frage <?=$questionNumber?>: <?=$questionText?></p> <!-- title text -->
+                    <div class="my-3 mx-4">
+        
+                        <p>Frage <?=$questionNumber?>: <?=$questionText?></p> <!-- title text -->
 
-</div>
+                    </div>
                     
                 </div>
             </div>
 
             <div class="row mx-0 mt-"> <!-- quiz answer/footer block -->                
 
-                    <div class="row answerBox mt-1 mx-0"> <!-- quiz answer block --> 
+                    <div class="row answerBox mt-2 mx-0"> <!-- quiz answer block --> 
                         <div class="col-sm-lg">
                             
                         <?php
@@ -96,7 +96,7 @@ include 'php/dev-console.php';
                     <div class="row mt-2"> <!-- quiz footer block -->   
                         <div class="col d-flex justify-content-between align-items-center">
                             <button type="submit" class="btn btn-success order-3" name="sent" value="1">Next</button> <!-- button create quiz -->
-                            <p id="infoBar" class="m-0 p-0 order-2">Questions Quiz: <span id="currentQuizQuestion">1/</span><span><?=$_SESSION['aq']?></span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p> <!-- display question status of quiz/database -->   
+                            <p id="infoBar" class="m-0 p-0 order-2">Questions Quiz: <span id="currentQuizQuestion"><?=$_SESSION['CQI']+1?>/</span><span><?=$_SESSION['aq']?></span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p> <!-- display question status of quiz/database -->   
                             </form>
                             <form action="/php/result.php" method="POST">
                                 <button type="submit" class="btn btn-danger order-1" id="back" name="back" value="1" <?php if($_SESSION['CQI'] == 0) echo 'disabled';?>>Back</button> <!-- button new quiz -->
@@ -122,9 +122,7 @@ echo $backDisabled;
 print_r($_SESSION);
 print_r($_POST);
 echo "</pre>"*/
+
+include 'php/footer.php';
 ?>
 
-<script src="/js/validation.js"></script>
-
-</body>
-</html>

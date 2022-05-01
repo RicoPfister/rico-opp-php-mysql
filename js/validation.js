@@ -30,14 +30,6 @@ function evaluateAddQuestion(){
     return true;
 }
 
-function goToPreviousQuestion() { 
-         
-    back.open("POST", "/php/result.php", true);
-    back.setRequestHeader("back","1");
-    back.send(); 
-    window.open("/php/result.php", "_self");    
-}
-
 function evaluateAnswer() { // user validation
 
     //alert("ok3");

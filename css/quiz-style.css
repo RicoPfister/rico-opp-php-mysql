@@ -1,5 +1,5 @@
 body {
-    background-image: url("/images/background3.jpg");
+    background-image: url("/images/background.jpg");
     background-color: lightgrey;
   }
 
@@ -45,6 +45,13 @@ textarea {
 
 #totalQuizQuestions {
     display: none;
+}
+
+#devConsole {
+    visibility: hidden;
+    position: absolute;
+    word-wrap: break-word;
+    width: 30rem;    
 }
 
 

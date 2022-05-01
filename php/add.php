@@ -57,7 +57,7 @@ include 'dev-console.php';
 
             <div class="row mx-0 mt-"> <!-- quiz answer/footer block -->                
 
-                    <div class="row answerBox mt-1 mx-0"> <!-- quiz answer block --> 
+                    <div class="row answerBox mt-2 mx-0"> <!-- quiz answer block --> 
                         <div class="col-sm-lg">
                             
                             <div class="my-2"></div>
@@ -141,9 +141,7 @@ print_r($_SESSION);
 print_r($_POST);
 echo "</pre>"
 */
+
+include 'footer.php';
 ?>
-
-<script src="/js/validation.js"></script>
-
-</body>
-</html>
+?>
