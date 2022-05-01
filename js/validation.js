@@ -30,6 +30,14 @@ function evaluateAddQuestion(){
     return true;
 }
 
+function goToPreviousQuestion() { 
+         
+    back.open("POST", "/php/result.php", true);
+    back.setRequestHeader("back","1");
+    back.send(); 
+    window.open("/php/result.php", "_self");    
+}
+
 function evaluateAnswer() { // user validation
 
     //alert("ok3");
@@ -53,7 +61,7 @@ function evaluateAnswer() { // user validation
 function evaluateNewQuizLimit(){
 
         if (parseInt(document.getElementById('userNewQuiz').value) < 1){
-        document.getElementById("infoBar").innerHTML = "&#10083; Minimum 1 question required &#10083; ";
+        document.getElementById("infoBar").innerHTML = "&#10083; Minimum 1 question required (maximum: "+document.getElementById('totalQuizQuestions').innerText+") &#10083; ";
         document.getElementById("infoBar").style.color = 'red';
         document.getElementById("userNewQuiz").value = "";
         return false;

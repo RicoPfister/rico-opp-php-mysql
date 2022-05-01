@@ -95,12 +95,15 @@ include 'php/dev-console.php';
 
                     <div class="row mt-2"> <!-- quiz footer block -->   
                         <div class="col d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-danger">Back</button> <!-- button new quiz -->
-                            <p id="infoBar" class="m-0 p-0">Questions Quiz: <span id="currentQuizQuestion">1/</span><span><?=$_SESSION['aq']?></span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p> <!-- display question status of quiz/database -->   
-                            <button type="submit" class="btn btn-success" name="sent" value="1">Next</button> <!-- button create quiz -->
+                            <button type="submit" class="btn btn-success order-3" name="sent" value="1">Next</button> <!-- button create quiz -->
+                            <p id="infoBar" class="m-0 p-0 order-2">Questions Quiz: <span id="currentQuizQuestion">1/</span><span><?=$_SESSION['aq']?></span> | Database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span></p> <!-- display question status of quiz/database -->   
+                            </form>
+                            <form action="/php/result.php" method="POST">
+                                <button type="submit" class="btn btn-danger order-1" id="back" name="back" value="1" <?php if($_SESSION['CQI'] == 0) echo 'disabled';?>>Back</button> <!-- button new quiz -->
+                            </form> 
                         </div>
                     </div>
-                </form>
+                
 
             </div>
             <div class="col"></div> <!-- end invisible col -->
@@ -114,12 +117,11 @@ unset($_SESSION['a2']);
 unset($_SESSION['a3']);
 unset($_SESSION['a4']);
 
-/*
-echo "<pre>";
+/*echo "<pre>";
+echo $backDisabled;
 print_r($_SESSION);
 print_r($_POST);
-echo "</pre>"
-*/
+echo "</pre>"*/
 ?>
 
 <script src="/js/validation.js"></script>

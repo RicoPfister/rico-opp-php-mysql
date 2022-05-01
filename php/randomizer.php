@@ -60,17 +60,23 @@ if (isset($_SESSION["newQuiz"])) {
     unset($_SESSION['newQuiz']);
 }
 
-    elseif (isset($_POST["sent"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) ){ // if a quiz is running go to to next question number in der qorder array and remove the last element from the array
+    elseif (isset($_POST["sent"]) || isset($_POST["q2"]) || isset($_POST["q3"]) || isset($_POST["q4"]) || isset($_POST["back"])){ // if a quiz is running go to to next question number in der qorder array and remove the last element from the array
 
-            $_SESSION['PID'] = $_SESSION["QOrder"][$_SESSION['CQI']];          
-            $_SESSION['CQI']++;
+            $_SESSION['PID'] = $_SESSION["QOrder"][$_SESSION['CQI']];
+            
+            if ($_SESSION['CQI'] != 0) {
+
+                if (isset($_POST['back'])) {
+          
+                        $_SESSION['CQI']--;
+                } else $_SESSION['CQI']++;        
+                
+            } else $_SESSION['CQI']++;
 
             //print_r($_SESSION);
 
             if ($_SESSION['CQI'] == $_SESSION['aq']) $currentQID  = $_SESSION['PID']; else $currentQID  = $_SESSION['QOrder'][$_SESSION['CQI']];                               
 
     }
-
-
 
 ?>
