@@ -9,17 +9,17 @@ body {
 
 .questionBoxAdd {
     background: rgb(200,200,200);
-    height: 7rem;
+    min-height: 7rem;
 }
 
 .questionBoxQuestion {
     background: rgb(200,200,200);
-    height: 5rem;
+    min-height: 5rem;
 }
 
 .questionBoxEvaluation {
     background: rgb(200,200,200);
-    height: 6rem;
+    min-height: 6rem;
 }
 
 .answerBox {

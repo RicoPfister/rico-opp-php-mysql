@@ -20,7 +20,7 @@ if (isset($_POST['addQuestion'])){
 }
 
 if (isset($_POST['changeQuestion'])){
-    header("Location: browse.php");
+    header("Location: change.php");
     exit;
 }
 

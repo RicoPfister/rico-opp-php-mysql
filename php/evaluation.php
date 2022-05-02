@@ -43,12 +43,13 @@ include 'dev-console.php';
                     <div class="col d-flex justify-content-end"> <!-- header whole button box -->
                     
                         <div class="col-auto d-flex justify-content-end"> <!-- header new quiz box-->
-                            <input type="number" class="amountQuestions form-control me-2 border-dark" name="aq" id="userNewQuiz" placeholder=""> 
+                            <input type="number" class="amountQuestions form-control me-2 border-dark" name="aq" id="userNewQuiz" value="<?=$_SESSION['aq']?>"> 
                             <button type="submit" class="btn btn-dark me-2" name="newQuiz" value="1"><div class="d-none d-sm-block">New Question(s)</div><div class="d-block d-sm-none">N</div></button> <!-- button new quiz - change text if smaller/bigger than sm-->
                         </div>
 
                         <div class="col-auto d-flex justify-content-end"> <!-- header add quiz box -->
-                            <button type="submit" class="btn btn-dark" name="addQuestion" value="1"><div class="d-none d-sm-block">Add Question</div><div class="d-block d-sm-none">+</div></button> <!-- button create quiz - change text if smaller/bigger than sm-->
+                            <button type="submit" class="btn btn-dark me-2 editButtons" name="addQuestion" value="1">+</button> <!-- button create quiz -->
+                            <button type="submit" class="btn btn-dark editButtons" name="changeQuestion" value="1">c</button> <!-- button remove quiz -->
                         </div>
                     </div>
                     </form>

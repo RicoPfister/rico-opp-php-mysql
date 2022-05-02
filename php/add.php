@@ -24,7 +24,7 @@ include 'dev-console.php';
                     <div class="col d-flex justify-content-end"> <!-- header whole button box -->
                     
                         <div class="col-auto d-flex justify-content-end"> <!-- header new quiz box-->
-                            <input type="number" class="amountQuestions form-control me-2 border-dark" id="userNewQuiz" name="aq" placeholder=""> 
+                            <input type="number" class="amountQuestions form-control me-2 border-dark" id="userNewQuiz" name="aq" value="<?=$_SESSION['aq']?>"> 
                             <button type="submit" class="btn btn-dark d-none d-sm-block me-2" name="newQuiz" value="1">New Question(s)</button> <!-- button new quiz - show if bigger than sm-->
                             <button type="submit" class="btn btn-dark me-2 d-block d-sm-none" name="newQuiz" value="1">New</button> <!-- button new quiz - show if smaller than sm-->
                         </div>
