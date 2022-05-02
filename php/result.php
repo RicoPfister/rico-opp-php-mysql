@@ -5,8 +5,8 @@ $_SESSION['lastPOST'] = $_POST;
 
 include 'databaseConnection.php';
 
-$DBQID = $DBAccess->query("SELECT QID FROM Questions"); // get QID from database
-$DBQuestion = $DBAccess->query("SELECT QuestionDE FROM Questions"); // get question title from database
+$DBQID = $DBAccess->query("SELECT QID FROM Questions Where Questions.IsActive = 1"); // get QID from database
+$DBQuestion = $DBAccess->query("SELECT QuestionDE FROM Questions Where Questions.IsActive = 1"); // get question title from database
 
 include 'randomizer.php';
 
@@ -15,14 +15,14 @@ print_r($quizQuestionsOrder);
 echo "$currentQID";
 */
 
-$DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = $currentQID AND Questions.QID = Answers.QID");
+$DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = $currentQID AND Questions.QID = Answers.QID AND Questions.IsActive = 1 AND Answers.IsActive = 1");
 $currentQuestionData = $DBQuestionAnswer->fetchALL(PDO::FETCH_ASSOC);
 
 $_SESSION["CID"] = $currentQID; 
 $_SESSION["q"] = $currentQuestionData[0]["QuestionDE"]; // set current question title to session array
 
 // set total numbers of questions in session array
-$DBtotalNumberQuestion = $DBAccess->query("SELECT QID FROM Questions");
+$DBtotalNumberQuestion = $DBAccess->query("SELECT QID FROM Questions Where Questions.IsActive = 1");
 $totalNumberQuestion = $DBtotalNumberQuestion->fetchALL(PDO::FETCH_ASSOC);
 $_SESSION["totalQuestions"] = count($totalNumberQuestion);
 

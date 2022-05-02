@@ -33,8 +33,6 @@ for($i = 1; $i < 5; $i++){
     }     
 }
 
-// write into database
-
 //go back to index
 header("Location: /index.php");
 exit();

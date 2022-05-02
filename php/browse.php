@@ -6,8 +6,8 @@ include 'header.php';
 include 'dev-console.php';
 include 'databaseConnection.php';
 
-$DBAll = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID"); // get all data from database
-$DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions"); // get all QID from database
+$DBAll = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID AND Questions.IsActive = 1 AND Answers.IsActive = 1"); // get all data from database
+$DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions WHERE Questions.IsActive = 1"); // get all QID from database
 
 ?>
 
@@ -58,7 +58,7 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions"); // get all QI
 
                                     $currentQID = $TNQ[$a]['QID'];
 
-                                    $DBCurrentQuestionData = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = $currentQID AND Questions.QID = Answers.QID"); // get all data from database
+                                    $DBCurrentQuestionData = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = $currentQID AND Questions.QID = Answers.QID AND Questions.IsActive = 1 AND Answers.IsActive = 1"); // get all data from database
 
                                     $CurrentQuestionData = $DBCurrentQuestionData->fetchALL(PDO::FETCH_ASSOC); // get current question/answers data
                                     
@@ -82,15 +82,15 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions"); // get all QI
 
                                             if($CurrentQuestionData[$b]['CorrectAnswer'] == 1){
                                                 ${"answer".$b."Correct"} = 'checked';
-                                            } else {${"answer".$b."Correct"} = "";};
-                                        } else {${"answer".$b."Text"} = ""; ${"answer".$b."Correct"} = "";}
+                                            } else {${"answer".$b."Correct"} = null;};
+                                        } else {${"answer".$b."Text"} = null; ${"answer".$b."Correct"} = null;}
                                     }   
 
                                     echo "
                                     <div class='form-check mb-2'>
                                         <label for='qq'><b>Question $questionID:</b></label>
                                         <div class='d-flex align-items-center'>
-                                            <textarea class='form-control me-2 mt-2'  maxlength='80' rows='2' id='q' name='q'>$questionText</textarea>
+                                            <textarea class='form-control me-2 mt-2' maxlength='80' rows='2' id='q' name='q'>$questionText</textarea>
                                             <button type='submit' class='btn btn-danger mt-2'>x</button> <!-- button remove question -->
                                         </div>
                                     </div>";                                
