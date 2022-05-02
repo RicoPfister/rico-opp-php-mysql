@@ -1,122 +1,121 @@
 <?php
+
 session_start();
-/* print_r($_SESSION); */
 
-include 'header.php';
-include 'dev-console.php';
+// print_r($_POST);
 
-?>
+include 'databaseConnection.php';
 
-<div class="container">
-    <div class="row">
-        <div class="col"></div> <!-- start invisible col -->
+$CurrentQuestionID = $_POST['qid'];
 
-        <div class="col-xl-7 max-vh-100  mb-5 quizContainer"> <!-- quiz container -->
-        <form action="/php/result.php" onsubmit="return evaluateNewQuizLimit()" method="POST">
-            <div class="row m-0"> <!-- quiz header block -->    
-               
-                <div class="col colHeader d-sm-flex m-0 p-0">
+$DBAll = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID AND Questions.QID = $CurrentQuestionID"); // get all data from database
+$allData = $DBAll->fetchALL(PDO::FETCH_ASSOC); // total number of questions
 
-                    <div class="col-auto d-flex align-items-center m-0 p-0">
-                        <h4 class="m-0 p-0">Quiz Generator</h4> <!-- title text -->
-                    </div>
-                    
-                    <div class="col d-flex justify-content-end"> <!-- header whole button box -->
-                    
-                        <div class="col-auto d-flex justify-content-end"> <!-- header new quiz box-->
-                            <input type="number" class="amountQuestions form-control me-2 border-dark" id="userNewQuiz" name="aq" value="<?=$_SESSION['aq']?>"> 
-                            <button type="submit" class="btn btn-dark d-none d-sm-block me-2" name="newQuiz" value="1">New Question(s)</button> <!-- button new quiz - show if bigger than sm-->
-                            <button type="submit" class="btn btn-dark me-2 d-block d-sm-none" name="newQuiz" value="1">New</button> <!-- button new quiz - show if smaller than sm-->
-                        </div>
+// update if question text has changed
+if (isset($_POST['q'])) {
 
-                        <div class="col-auto d-flex justify-content-end"> <!-- header add quiz box -->
-                            <button type="submit" class="btn btn-dark me-2 editButtons" name="addQuestion" value="1">+</button> <!-- button create quiz -->
-                            <button type="submit" class="btn btn-dark editButtons" name="changeQuestion" value="1">c</button> <!-- button remove quiz -->
-                        </div>
-                    </div>
-                    </form>
+    if ($_POST['q'] != $allData[0]['QuestionDE']) {
+        $question = $_POST['q'];
+        $questionTextExec = "UPDATE `Questions` SET `QuestionDE` = '$question' WHERE Questions.QID = $CurrentQuestionID";
+
+        $statement = $DBAccess->prepare($questionTextExec);
+        $statement->execute();
+    }
+
+}
+
+// update if answer text/answer checks has changed
+
+for ($i=0; $i<4; $i++) {
+
+    $i_i = $i+1;
+
+    if (isset($_POST['at'.$i_i])) {
+
+        $AID = $allData[$i]['AID'];
         
-                </div>                                  
-            </div>          
+        if ($_POST['at'.$i_i] != $allData[$i]['AnswerDE']) {
+            
+            ${'att'.$i_i} = $_POST['at'.$i_i];
+            ${'atExec'.$i_i} = "UPDATE `Answers` SET `AnswerDE` = '${'att'.$i_i}' WHERE Answers.AID = $AID";
+            
+            $statement = $DBAccess->prepare(${'atExec'.$i_i});
+            $statement->execute();
+        }
+    }
 
-            <form action="/php/create.php" onsubmit="return evaluateAddQuestion()" method="POST">     
+    if (isset($_POST['ac'.$i_i])) {
 
-            <div class="row mx-0 mt-"> <!-- quiz answer/footer block -->                
+        if ($_POST['ac'.$i_i] != $allData[$i]['CorrectAnswer']) {
+            
+            ${'ac'.$i_i} = $_POST['ac'.$i_i];
+            ${'acExec'.$i_i}  = "UPDATE `Answers` SET `CorrectAnswer` = '${'ac'.$i_i}' WHERE Answers.AID = $AID";
 
-                    <div class="row answerBox mt-2 mx-0"> <!-- quiz answer block --> 
-                        <div class="col-sm">
-                            
-                            <div class="mt-4"></div>
-                                
-                                <?php
+            $statement = $DBAccess->prepare(${'acExec'.$i_i});
+            $statement->execute();
+        }
+    }
 
-                                for ($a=1; $a<5; $a++) { // separate questions
+}
 
-                                    echo "
-                                    <div class='form-check'>
-                                        <label for='qq'>Question 1:</label>
-                                        <div class='d-flex align-items-center'>
-                                            <textarea class='form-control me-2'  maxlength='80' rows='2' id='qq' name='q'></textarea>
-                                            <button type='submit' class='btn btn-danger'>x</button> <!-- button remove question -->
-                                        </div>
-                                    </div>";                                
 
-                                    for ($i=1; $i<5; $i++) {
 
-                                        echo "
-                                        <div class='form-check'>
-                                            <div class='d-flex align-items-center'>
-                                                <input type='checkbox' class='form-check-input me-2' id='ac$i' name='a$i.'c'' value='1'>
-                                                <input type='text' class='form-control me-2' id='aa$i' name='a1t'>
-                                                <button type='submit' class='btn btn-dark'>x</button> <!-- button remove answer -->
-                                            </div>
-                                        </div>";                                     
-                                    }
+// print_r($allData);
 
-                                    if ($a != 4){
-                                        echo "<div class='mb-4'></div><hr>";
-                                    }
-                                }
+/*$sql = "UPDATE `Questions` SET `QuestionDE` = 'What do you use to form a Javascript loop??????' WHERE Questions.QID = $CurrentQuestionID";
 
-                                echo "
-                                <p class='mb-4' id='validationMessage'></p>"
-                                ?>
-                            
-                            <div class="mb-2"></div>
 
-                        </div>
-
-                    </div>
-                </div>               
-
-                    <div class="row mt-2"> <!-- quiz footer block -->   
-                        <div class="col d-flex justify-content-between align-items-center">
-                            <button type="reset" class="btn btn-danger">Reset</button> <!-- button new quiz -->
-                            <p id="infoBar" class="m-0 p-0">In database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span> Questions</p>
-                            <button type="submit" class="btn btn-success">Save</button> <!-- button create quiz -->    
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-            <div class="col"></div> <!-- end invisible col -->
-    </div>
-
-</div>
-
-<?php
-unset($_SESSION['q']);
-unset($_SESSION['a1']);
-unset($_SESSION['a2']);
-unset($_SESSION['a3']);
-unset($_SESSION['a4']);
 
 /*
-echo "<pre>";
-print_r($_SESSION);
-print_r($_POST);
-echo "</pre>"
+
+// create question database entry
+$sql = "INSERT INTO Questions (`QID`, `AType`, `QuestionDE`) VALUES (NULL, 'Radio', '$question')";
+
+$statement = $DBAccess->prepare($sql);
+$statement->execute();
+
+$query2 = $DBAccess->query("SELECT QID FROM Questions ORDER BY QID DESC LIMIT 1");
+$lastQID = $query2->fetch(PDO::FETCH_ASSOC)["QID"];
+
+// get POST data and save it in variables
+$question = $_POST["q"];
+
+// create answers database entries
+for($i = 1; $i < 5; $i++){
+
+    if($_POST["a".$i."t"] != ""){ // check if answer was given
+
+    ${"answer".$i."Text"} = $_POST["a".$i."t"];  
+
+    if(isset($_POST["a".$i."c"])) ${"answer".$i."Correct"} = $_POST["a".$i."c"]; else ${"answer".$i."Correct"} = 0;
+
+    ${"sql".$i} = "INSERT INTO `Answers` (`AID`, `AnswerDE`, `Image`, `CorrectAnswer`, `QID`, `AIndex`) VALUES (NULL, '${"answer".$i."Text"}', '0', '${"answer".$i."Correct"}', $lastQID, $i)";
+    ${"statement".$i} = $DBAccess->prepare(${"sql".$i}); 
+    ${"statement".$i}->execute();
+    }     
+}
+
+// write into database
+
 */
 
-include 'footer.php';
-?>
+//go back to index
+
+header("Location: /php/browse.php");
+exit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

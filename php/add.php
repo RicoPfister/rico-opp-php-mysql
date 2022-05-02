@@ -117,7 +117,7 @@ include 'dev-console.php';
                     <div class="row mt-2"> <!-- quiz footer block -->   
                         <div class="col d-flex justify-content-between align-items-center">
                             <button type="reset" class="btn btn-danger">Reset</button> <!-- button new quiz -->
-                            <p id="infoBar" class="m-0 p-0">In database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span> Questions</p>    
+                            <p id="infoBar" class="m-0 p-0">In database: <span id="totalQuestions"><?=$_SESSION['totalQuestions']?></span> questions</p>    
                             <button type="submit" class="btn btn-success">Send</button> <!-- button create quiz -->
                         </div>
                     </div>

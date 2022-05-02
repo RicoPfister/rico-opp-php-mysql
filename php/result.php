@@ -26,11 +26,9 @@ $DBtotalNumberQuestion = $DBAccess->query("SELECT QID FROM Questions");
 $totalNumberQuestion = $DBtotalNumberQuestion->fetchALL(PDO::FETCH_ASSOC);
 $_SESSION["totalQuestions"] = count($totalNumberQuestion);
 
-// write from database to session array
-
 $tCa = 0;
 
-for($i=0; $i<4; $i++){
+for($i=0; $i<4; $i++){ // write from database to session array
 
     if (isset($currentQuestionData[$i])) {
         $_SESSION["a".$i+1] = $currentQuestionData[$i]['AnswerDE'];
