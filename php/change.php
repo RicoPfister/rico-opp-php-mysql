@@ -47,7 +47,7 @@ include 'dev-console.php';
               
                 <div class="my-2 mx-3">
     
-                <label for="qq">Your Question:</label>
+                <label for="q">Your Question:</label>
                 <textarea class="form-control"  maxlength="80" rows="2" id="qq" name="q"></textarea>
 
 </div>

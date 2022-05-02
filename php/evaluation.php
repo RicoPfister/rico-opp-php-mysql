@@ -5,8 +5,8 @@ include 'databaseConnection.php';
 $evaluationText = 
 ["Extraordinary! You haven't made any mistakes.",
 "Congratulation! You made almost no mistakes.",
-"Great, but you made some mistakes. Maybe you do the quiz again?",
-"Unfortunately, you made many mistakes. Please try again."
+"Great! But you made some mistakes. Maybe you do the quiz again?",
+"Unfortunately you made many mistakes. Please try again."
 ];
 
 $points = 0;
@@ -30,7 +30,7 @@ include 'dev-console.php';
     <div class="row">
         <div class="col-sm"></div> <!-- start invisible col -->
 
-        <div class="col-xl-6 max-vh-100 quizContainer"> <!-- quiz container -->
+        <div class="col-xl-6 max-vh-100  mb-5 quizContainer"> <!-- quiz container -->
         <form action="/php/result.php" method="POST" onsubmit="return evaluateNewQuizLimit()">
             <div class="row m-0"> <!-- quiz header block -->    
                
@@ -65,7 +65,7 @@ include 'dev-console.php';
                     <div class="mt-3 mb-0 ms-3 pb-0 mx-4">
         
                         <h4 class="p-0 m-0">Evaluation</h4>
-                        <p class="my-2 pb-1">You have finished the quiz. Here is the evaluation and a final score:</p>
+                        <p class="my-2 pb-1">You have finished the quiz. Here is the detailed result and the final score:</p>
                     </div>
                     
                 </div>

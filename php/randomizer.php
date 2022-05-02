@@ -19,6 +19,11 @@ if (isset($_POST['addQuestion'])){
     exit;
 }
 
+if (isset($_POST['changeQuestion'])){
+    header("Location: browse.php");
+    exit;
+}
+
 if (isset($_SESSION["newQuiz"])) {
 
     if (isset($_POST["aq"]) && ($_POST["aq"]) != "") $amountOfQuestions = $_POST["aq"]; else $amountOfQuestions = 5; // set number of questions for next quiz
