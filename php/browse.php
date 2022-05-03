@@ -53,6 +53,7 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions WHERE Questions.
                                 <?php
 
                                 $TNQ = $DBTotalQuestions->fetchALL(PDO::FETCH_ASSOC); // total number of questions
+                                $_SESSION['totalQuestions'] = count($TNQ);
 
                                 for ($a=0; $a<count($TNQ); $a++) { // separate questions
 
@@ -72,10 +73,7 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions WHERE Questions.
                                     $questionText = $CurrentQuestionData[0]['QuestionDE'];
                                       
                                     for($b=0; $b<4; $b++){
-
-                                        echo "
-                                        <form action='/php/change.php' method='POST'>"; // form start
-
+                                        
                                         if (isset($CurrentQuestionData[$b])){
 
                                             ${"answer".$b."Text"} = $CurrentQuestionData[$b]['AnswerDE'];
@@ -84,14 +82,20 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions WHERE Questions.
                                                 ${"answer".$b."Correct"} = 'checked';
                                             } else {${"answer".$b."Correct"} = null;};
                                         } else {${"answer".$b."Text"} = null; ${"answer".$b."Correct"} = null;}
-                                    }   
+                                    }                                                                   
+                                    
+                                    // show question text
+                                    ?>
 
+                                    <form action='/php/change.php' onsubmit='return evaluateChanges()' method='POST'>
+
+                                    <?php
                                     echo "
                                     <div class='form-check mb-2'>
                                         <label for='qq'><b>Question $questionID:</b></label>
                                         <div class='d-flex align-items-center'>
                                             <textarea class='form-control me-2 mt-2' maxlength='80' rows='2' id='q' name='q'>$questionText</textarea>
-                                            <button type='submit' class='btn btn-danger mt-2'>x</button> <!-- button remove question -->
+                                            <button type='submit' class='btn btn-danger mt-2' name='hide_q' value='1'>x</button> <!-- button remove question -->
                                         </div>
                                     </div>";                                
 
@@ -99,20 +103,29 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions WHERE Questions.
 
                                         $i_i = $i+1;
 
+                                        // show answer data
+
+                                        // button visibility                                       
+                                        if (isset($CurrentQuestionData[$i])) {
+                                            if (count($CurrentQuestionData) > 2) {
+                                            $buttonVisibility = "style='visibility:visible'";
+                                            } else $buttonVisibility = "style='visibility:hidden'";
+                                        } else $buttonVisibility = "style='visibility:hidden'";
+
                                         echo "
                                         <div class='form-check'>
                                             <div class='d-flex align-items-center'>
                                                 <input type='hidden' name='qid' value=$questionID>
                                                 <input type='checkbox' class='form-check-input me-2' id='ac$i_i' name='ac$i_i' value='1' ${"answer".$i."Correct"}>
                                                 <input type='text' class='form-control me-2' id='at$i_i' name='at$i_i' value='${"answer".$i."Text"}'>
-                                                <button type='submit' class='btn btn-dark'>x</button> <!-- button remove answer -->                    
+                                                <button type='submit' class='btn btn-dark answerButton' name='hide_a$i_i' value='1' $buttonVisibility>x</button> <!-- button remove answer -->                    
                                             </div>                    
                                         </div>";                                     
                                     }
 
                                         echo "
                                         <div class='row-1 d-flex justify-content-center'>
-                                            <button type='submit' class='btn btn-success mt-2' name='save' value='1'>Save changes</button> <!-- button save changes -->
+                                            <button type='submit' class='btn btn-success mt-2'>Save changes of this question</button> <!-- button save changes -->
                                          </div>";
 
                                     if ($a != count($TNQ)-1){
@@ -145,5 +158,7 @@ $DBTotalQuestions = $DBAccess->query("SELECT QID FROM Questions WHERE Questions.
     </div>
 
 </div>
+
+<button class="answerButton">Try it</button>
 
 <?php include 'footer.php';?>

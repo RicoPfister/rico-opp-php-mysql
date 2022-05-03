@@ -2,6 +2,8 @@
 
 session_start();
 
+$_SESSION['lastPOST'] = $_POST;
+
 include 'databaseConnection.php';
 
 $question = $_POST["q"];

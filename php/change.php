@@ -2,6 +2,8 @@
 
 session_start();
 
+$_SESSION['lastPOST'] = $_POST;
+
 // print_r($_POST);
 
 include 'databaseConnection.php';
@@ -15,6 +17,21 @@ $allData = $DBAll->fetchALL(PDO::FETCH_ASSOC);
 /*// set new AID ==> php myadmin sets AID automatically
 $query2 = $DBAccess->query("SELECT AID FROM Answers ORDER BY AID DESC LIMIT 1");
 $newAID = ($query2->fetch(PDO::FETCH_ASSOC)["AID"])+1;*/
+
+if ($_POST['q'] == ""){
+    goto end;
+}
+
+// hide question
+if (isset($_POST['hide_q'])) {
+
+    ${'qhExec'} = "UPDATE `Questions` SET `IsActive` = '0' WHERE Questions.QID = $CurrentQuestionID";
+            
+    $statement = $DBAccess->prepare(${'qhExec'});
+    $statement->execute();
+
+    goto end;
+}
 
 // update if question text has changed
 if (isset($_POST['q'])) {
@@ -35,11 +52,27 @@ for ($i=0; $i<4; $i++) {
 
     $i_i = $i+1;
 
+    if ($_POST['at'.$i+1] == ""){
+        goto enda;
+    }
+
+    if (isset($allData[$i]['AID'])){
+        $AID = $allData[$i]['AID'];
+    }
+
+    // hide answer 
+    if (isset($_POST['hide_a'.$i+1])) {
+
+        ${'ahExec'} = "UPDATE `Answers` SET `IsActive` = '0' WHERE Answers.AID = $AID";
+                
+        $statement = $DBAccess->prepare(${'ahExec'});
+        $statement->execute();
+
+        goto end;
+    }
+
     if (isset($_POST['at'.$i_i]) && $_POST['at'.$i_i] != "") { // check changes of text answers
 
-        if (isset($allData[$i]['AID'])){
-            $AID = $allData[$i]['AID'];
-        }
         ${'att'.$i_i} = $_POST['at'.$i_i];
 
         if(isset($_POST['ac'.$i_i])) ${'ac'.$i_i} = 1; else ${'ac'.$i_i} = 0;
@@ -73,64 +106,11 @@ for ($i=0; $i<4; $i++) {
         }
     }
 
+    enda:
+
 }
 
-// print_r($allData);
-
-/*$sql = "UPDATE `Questions` SET `QuestionDE` = 'What do you use to form a Javascript loop??????' WHERE Questions.QID = $CurrentQuestionID";
-
-
-
-/*
-
-// create question database entry
-$sql = "INSERT INTO Questions (`QID`, `AType`, `QuestionDE`) VALUES (NULL, 'Radio', '$question')";
-
-$statement = $DBAccess->prepare($sql);
-$statement->execute();
-
-$query2 = $DBAccess->query("SELECT QID FROM Questions ORDER BY QID DESC LIMIT 1");
-$lastQID = $query2->fetch(PDO::FETCH_ASSOC)["QID"];
-
-// get POST data and save it in variables
-$question = $_POST["q"];
-
-// create answers database entries
-for($i = 1; $i < 5; $i++){
-
-    if($_POST["a".$i."t"] != ""){ // check if answer was given
-
-    ${"answer".$i."Text"} = $_POST["a".$i."t"];  
-
-    if(isset($_POST["a".$i."c"])) ${"answer".$i."Correct"} = $_POST["a".$i."c"]; else ${"answer".$i."Correct"} = 0;
-
-    ${"sql".$i} = "INSERT INTO `Answers` (`AID`, `AnswerDE`, `Image`, `CorrectAnswer`, `QID`, `AIndex`) VALUES (NULL, '${"answer".$i."Text"}', '0', '${"answer".$i."Correct"}', $lastQID, $i)";
-    ${"statement".$i} = $DBAccess->prepare(${"sql".$i}); 
-    ${"statement".$i}->execute();
-    }     
-}
-
-// write into database
-
-*/
-
-//go back to index
+end:
 
 header("Location: /php/browse.php");
 exit();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
