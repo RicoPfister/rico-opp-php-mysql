@@ -2,6 +2,8 @@
 
 session_start();
 
+$_SESSION['lastPOST'] = $_POST;
+
 include 'databaseConnection.php';
 
 $question = $_POST["q"];
@@ -32,8 +34,6 @@ for($i = 1; $i < 5; $i++){
     ${"statement".$i}->execute();
     }     
 }
-
-// write into database
 
 //go back to index
 header("Location: /index.php");

@@ -1,3 +1,9 @@
+function evaluateChanges(){
+
+    // dummy
+
+}
+
 function evaluateAddQuestion(){
 
     let addAnswer = document.querySelectorAll("input[id*=aa]");    
