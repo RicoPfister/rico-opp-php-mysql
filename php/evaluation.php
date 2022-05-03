@@ -86,7 +86,7 @@ include 'dev-console.php';
                                 $userTotalWrongAnswers = 0;
 
                                 $UQID = substr($userQuestion, 2); // trimmed user question number
-                                $DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID AND Questions.QID = $UQID"); // select question number array
+                                $DBQuestionAnswer = $DBAccess->query("SELECT * FROM Questions, Answers WHERE Questions.QID = Answers.QID AND Questions.QID = $UQID AND Questions.IsActive = 1 AND Answers.IsActive = 1"); // select question number array
                                 $answerNumber = $DBQuestionAnswer->fetchALL(PDO::FETCH_ASSOC); // gather all question/answer data
 
                                 /*
@@ -143,13 +143,20 @@ include 'dev-console.php';
 
                                 echo "<hr>";
                             }
+                            if ($points == 0) {$evalationFormulaPoints = 0;} else {
+                                $evalationFormulaPoints = 1/$_maxPoints*$points;
+                            }
 
-                            $evalationFormula = -1/$_maxMistakes*$mistakes+1*100 + 1/$_maxPoints*$points*100;
+                            if ($mistakes == 0) {$evalationFormulaMistakes = 0;} else {
+                                $evalationFormulaMistakes = 1/$_maxMistakes*$mistakes;
+                            }
+
+                            $evalationFormulaTotal = $evalationFormulaPoints - $evalationFormulaMistakes;
                             
-                            if ($evalationFormula == 200) $evaluationTextIndex = 0;
-                            elseif ($evalationFormula >= 180) $evaluationTextIndex = 1;
-                            elseif ($evalationFormula >= 160) $evaluationTextIndex = 2;
-                            else $evaluationTextIndex = 3;                            
+                            if ($evalationFormulaTotal== 1) $evaluationTextIndex = 0;
+                            elseif ($evalationFormulaTotal >= 0.9) $evaluationTextIndex = 1;
+                            elseif ($evalationFormulaTotal >= 0.7) $evaluationTextIndex = 2;
+                            else $evaluationTextIndex = 3;                           
                             
                             ?>
 

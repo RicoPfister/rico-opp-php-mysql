@@ -23,6 +23,7 @@ add, change or hide questions;
 * A lot of duplicate code. More use of php include and loops.
 * If a question has less than the default 4 answers caused a lot 
 more problems to solve and more code to write
+* Evaluation formula: big problems with division by zero
 
 ## Versions
 
