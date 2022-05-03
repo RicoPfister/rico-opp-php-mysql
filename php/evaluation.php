@@ -156,6 +156,10 @@ include 'dev-console.php';
                         <p class="mt-0 mb-0 pb-1"><?=$points?> correct answers out of a maximum of <?=$_maxPoints?>.</p>
                         <p><?=$mistakes?> wrong answers out of a maximum of <?=$_maxMistakes?>.</p>
 
+                        <?php include 'evaluation-diagram.php'?>
+
+                        <p class="mt-0 mb-3 pb-1">The further apart both indicators are, the better the result.</P>
+
                         <p class="mt-0 mb-0 pb-1"><?=$evaluationText[$evaluationTextIndex]?></p>
 
                     </div>
