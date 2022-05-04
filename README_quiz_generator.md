@@ -11,10 +11,11 @@ add, change or hide questions;
 
 * Randomly generated quiz every time you reload the webpage. Number of questions are adjustable.
 * Add a new question with a maximum of 4 answers
-* Evaluation of the entire quiz and each individual question
-* Validations: user answers, new quiz, add questions
-* What I used to realize to project: Bootstrap, HTML; CSS; JS; PHP; SQL; PHPmyAdmin
-* How to open the developer console which shows $_SESSION and last $_POST: ctrl + alt + y
+* 2 answer typee: radio and check boxes
+* Evaluation each individual question; use of svg to display the result graphically
+* Validation of: user answers, new quiz, add questions
+* I used to following tools t to to create the project: Bootstrap, HTML; CSS; JS; PHP; SQL; PHPmyAdmin
+* How to open the developer console which shows $_SESSION and $_POST: ctrl + alt + y
 * Hide instead of deleting of database entries
 * Mobile second (sort of)
 
@@ -27,7 +28,12 @@ more problems to solve and more code to write
 
 ## Versions
 
-1. test
+Day 1-2     Bootstrap grid; Show questions (PHP/SQL: SELECT); Evaluation text and formula
+Day 3-4     Randomize order (rand(0); array "pointer")
+Day 5-6     Add questions (PHP/SQL: INSERT; prepate; execute)
+Day 7-8     Change questions (PHP/SQL: UPDATE; "hide" database entries)
+Day 9-10    Validation
+Day 10-11   General improvements (add evaluation svg diagram; formula adjustments; more validations)
 
 ## Misc
 * Valdidation gibt Warnung aus bei: Keine Antwort ausgewählt; Fragelimit unter- oder überschritten; geplant: weniger als 2 Antworten (bei hiding)
