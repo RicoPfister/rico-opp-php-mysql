@@ -28,15 +28,17 @@ more problems to solve and more code to write
 
 ## Versions
 
-Day 1-2     Bootstrap grid; Show questions (PHP/SQL: SELECT); Evaluation text and formula
-Day 3-4     Randomize order (rand(0); array "pointer")
-Day 5-6     Add questions (PHP/SQL: INSERT; prepate; execute)
-Day 7-8     Change questions (PHP/SQL: UPDATE; "hide" database entries)
-Day 9-10    Validation
-Day 10-11   General improvements (add evaluation svg diagram; formula adjustments; more validations)
+Day 1-2     Bootstrap grid; Show questions (PHP/SQL: SELECT); Evaluation text and formulabr<br>
+Day 3-4     Randomize order (rand(0); array "pointer")<br>
+Day 5-6     Add questions (PHP/SQL: INSERT; prepate; execute)<br>
+Day 7-8     Change questions (PHP/SQL: UPDATE; "hide" database entries)<br>
+Day 9-10    Validation<br>
+Day 11-12   General improvements (add evaluation svg diagram; formula adjustments; more validations)
 
-## Misc
-* Valdidation gibt Warnung aus bei: Keine Antwort ausgewählt; Fragelimit unter- oder überschritten; geplant: weniger als 2 Antworten (bei hiding)
-* Highscore fehlt
+## To do:
+* Quiz categories
+* More quiz types: image select; image pixelpic; slider
+* High score
+* Nerd style (Dark theme. Quiz box formed like an old arcade machine)
 
 
